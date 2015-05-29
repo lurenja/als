@@ -1,0 +1,10 @@
+TABLE{
+	width: 100%;
+}
+@media all and (max-width: 50em) {
+  .custom_grid1 .ui-block-a { width: 50%; }
+  .custom_grid1 .ui-block-b
+}
+#rdo-single{
+	margin: 8px 0px;
+}

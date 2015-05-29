@@ -2,6 +2,7 @@
 
 class SiteController extends Controller
 {
+	public $defaultAction = 'index';
 	/**
 	 * Declares class-based actions.
 	 */

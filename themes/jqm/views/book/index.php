@@ -2,33 +2,29 @@
 /* @var $this BookController */
 /* @var $dataProvider CActiveDataProvider */
 ?>
-<div data-role="page" id="addbook_div">
-	<div data-role="header" data-position="fixed" data-position="inline">
+<div data-role="page">
+	<div data-role="header" data-position="fixed" id="pageone">
 		<h4>所有书籍</h4>
-		<a href="/als/index.php?r=book/create">New</a>
-		<a href="/als/index.php?r=book/create">New2</a>
 	</div>
-	<div data-role="content">
-		<ul data-role="listview" data-filter="true" data-inset="true">
+	<div class="ui-content">
+		<ul data-role="listview" data-filter="true" data-inset="true" class="ui-content">
 		<?php
-			//foreach($dataProvider->getData() as $data){
-			//var_dump($data);
-			//	//echo '<li data-icon="false" data-ajax="false"><a href="" data-id="">'.$data->b_name.'</a></li>';
-			//}
 			$dataList = $dataProvider->getData();
 			foreach($dataList as $data){
-				echo '<li data-icon="false" data-ajax="false"><a href="" data-id="">'.$data->b_name.'</a></li>';
+				echo '<li data-icon="false" data-ajax="false">',
+					//'<a href="" data-id="">'.$data->b_name.'</a>',
+					CHtml::link(CHtml::encode($data->b_name), array('view', 'id'=>$data->bid));
+					'</li>';
 			}
 		?>
 		</ul>
-    </div>	
-	<!-- <div data-role="footer" style="overflow:hidden;">
+	</div>
+	<div data-role="footer" data-position="fixed">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#" class="ui-btn-active">All</a></li>
-				<li><a href="/als/index.php?r=book/create">New</a></li>
-				<li><a href="#">About</a></li>
+				<li><a href="#" class="ui-btn-active">列表</a></li>
+				<li><a href="/als/index.php?r=book/create">新书</a></li>
 			</ul>
 		</div>
-    </div> -->
+    </div>
 </div>

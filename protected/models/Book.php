@@ -65,17 +65,17 @@ class Book extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'bid' => 'Book ID',
-			'b_name' => 'Book',
-			'author' => 'Author',
-			'country' => 'Country',
-			'age' => 'Age',
-			'pub_date' => 'Publish Date',
-			'pub_house' => 'Publish House',
-			'is_single' => 'Is Single',
-			'serial_no' => 'Serial No',
-			'type' => 'Type',
-			'rectime' => 'Rectime',
+			'bid' => '编号',
+			'b_name' => '书名',
+			'author' => '作者',
+			'country' => '国家',
+			'age' => '时代',
+			'pub_date' => '出版日期',
+			'pub_house' => '出版社',
+			'is_single' => '单本',
+			'serial_no' => '子册',
+			'type' => '类型',
+			'rectime' => '记录时间',
 		);
 	}
 

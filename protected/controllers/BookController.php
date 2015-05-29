@@ -89,6 +89,7 @@ class BookController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+		$modelBT=new BookType;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -102,6 +103,7 @@ class BookController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'modelBT'=>$modelBT,
 		));
 	}
 
