@@ -2,6 +2,7 @@
 
 class BookController extends Controller
 {
+	private $_btype;
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -63,21 +64,40 @@ class BookController extends Controller
 	public function actionCreate()
 	{
 		$model=new Book;
-		$modelBT=new BookType;
 
 		// Uncomment the following line if AJAX validation is needed
-		$this->performAjaxValidation($model);
+		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Book']))
 		{
 			$model->attributes=$_POST['Book'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->bid));
+			if($model->is_single == 0){
+				$result = true;
+				$serialArray = explode(',', $model->serial_no);
+				foreach($serialArray as $serialNo){
+					$time = gettimeofday();
+					$model->bid = $time['sec'].$time['usec'];
+					$model->serial_no = $serialNo;
+					if($model->save()){
+						$model->setIsNewRecord(true);
+					}else{
+						$result = false;
+						break;
+					}
+				}
+				if($result){
+					$this->redirect(array('view','id'=>$model->bid));
+				}
+			}else{
+				$time = gettimeofday();
+				$model->bid = $time['sec'].$time['usec'];
+				if($model->save())
+					$this->redirect(array('view','id'=>$model->bid));
+			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
-			'modelBT'=>$modelBT,
 		));
 	}
 
@@ -89,7 +109,6 @@ class BookController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-		$modelBT=new BookType;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -103,7 +122,6 @@ class BookController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
-			'modelBT'=>$modelBT,
 		));
 	}
 
@@ -126,9 +144,11 @@ class BookController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$model=new Book;
 		$dataProvider=new CActiveDataProvider('Book');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
 
@@ -173,5 +193,15 @@ class BookController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	protected function loadBookType(){
+		$this->_btype = BookType::model()->findAll();
+		return $this->_btype;
+	}
+	
+	protected function loadTypeName($typeId){
+		$this->_btype = BookType::model()->findByPk($typeId);
+		return $this->_btype->description;
 	}
 }

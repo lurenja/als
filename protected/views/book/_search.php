@@ -13,7 +13,7 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'bid'); ?>
-		<?php echo $form->textField($model,'bid'); ?>
+		<?php echo $form->textField($model,'bid',array('size'=>14,'maxlength'=>14)); ?>
 	</div>
 
 	<div class="row">

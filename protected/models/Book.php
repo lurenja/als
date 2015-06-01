@@ -4,7 +4,7 @@
  * This is the model class for table "tbl_book".
  *
  * The followings are the available columns in table 'tbl_book':
- * @property integer $bid
+ * @property string $bid
  * @property string $b_name
  * @property string $author
  * @property string $country
@@ -34,8 +34,10 @@ class Book extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('b_name, author, country, age, pub_date, pub_house, is_single, serial_no, type', 'required'),
+			// array('rectime', 'required'),
+			array('b_name, author, country, age, pub_house, pub_date', 'required'),
 			array('is_single', 'numerical', 'integerOnly'=>true),
+			array('bid', 'length', 'max'=>20),
 			array('b_name, author, pub_house', 'length', 'max'=>128),
 			array('country, age', 'length', 'max'=>32),
 			array('serial_no', 'length', 'max'=>10),
@@ -55,7 +57,7 @@ class Book extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'btypes' => array(self::MANY_MANY, 'BookType', 't_no'),
+			'typeName' => array(self::HAS_ONE, 'BookType', 't_no'),
 		);
 	}
 
@@ -72,10 +74,10 @@ class Book extends CActiveRecord
 			'age' => '时代',
 			'pub_date' => '出版日期',
 			'pub_house' => '出版社',
-			'is_single' => '单本',
-			'serial_no' => '子册',
+			'is_single' => '整本/分册',
+			'serial_no' => '分册号',
 			'type' => '类型',
-			'rectime' => '记录时间',
+			'rectime' => 'Rectime',
 		);
 	}
 
@@ -97,7 +99,7 @@ class Book extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('bid',$this->bid);
+		$criteria->compare('bid',$this->bid,true);
 		$criteria->compare('b_name',$this->b_name,true);
 		$criteria->compare('author',$this->author,true);
 		$criteria->compare('country',$this->country,true);

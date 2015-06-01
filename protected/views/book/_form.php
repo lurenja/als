@@ -20,6 +20,12 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'bid'); ?>
+		<?php echo $form->textField($model,'bid',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->error($model,'bid'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'b_name'); ?>
 		<?php echo $form->textField($model,'b_name',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'b_name'); ?>

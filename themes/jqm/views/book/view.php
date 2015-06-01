@@ -24,7 +24,7 @@
 			<tr><td><?php echo $model->getAttributeLabel('pub_house'); ?></td><td><?php echo $model->pub_house; ?></td></tr>
 			<tr>
 			<td><?php echo $model->getAttributeLabel('is_single'); ?></td>
-			<td><?php echo intval($model->is_single) == 1?'是':'否'; ?></td>
+			<td><?php echo intval($model->is_single) == 1?'整本':'分册'; ?></td>
 			</tr>
 			<?php if(intval($model->is_single) == 0){?>
 			<tr>
@@ -32,7 +32,7 @@
 			<td><?php echo $model->serial_no; ?></td>
 			</tr>
 			<?php } ?>
-			<tr><td><?php echo $model->getAttributeLabel('type'); ?></td><td><?php echo $model->type; ?></td></tr>
+			<tr><td><?php echo $model->getAttributeLabel('type'); ?></td><td><?php echo $this->loadTypeName($model->type); ?></td></tr>
 			<tr><td><?php echo $model->getAttributeLabel('rectime'); ?></td><td><?php echo $model->rectime; ?></td></tr>
 		</tbody>
 		</table>

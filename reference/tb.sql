@@ -1,7 +1,7 @@
 create database als_dev character set utf8;
 use als_dev;
 CREATE TABLE tbl_book (
-  bid int(11) NOT NULL AUTO_INCREMENT,
+  bid varchar(20) NOT NULL,
   b_name varchar(128) DEFAULT NULL,
   author varchar(128) DEFAULT NULL,
   country varchar(32) DEFAULT NULL,

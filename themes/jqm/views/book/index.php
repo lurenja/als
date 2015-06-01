@@ -1,6 +1,7 @@
 <?php 
 /* @var $this BookController */
 /* @var $dataProvider CActiveDataProvider */
+/* @var $model Book*/
 ?>
 <div data-role="page">
 	<div data-role="header" data-position="fixed" id="pageone">
