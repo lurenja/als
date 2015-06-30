@@ -4,7 +4,7 @@
 ?>
 <div data-role="page">
 	<div data-role="header" data-position="fixed" data-add-back-btn="true">
-		<a href="/als/index.php?r=book" data-rel="back">首页</a>
+		<a href="" data-rel="back">首页</a>
 		<h4>《<?php echo $model->b_name; ?>》</h4>
 		<?php echo CHtml::link('编辑', array('update', 'id'=>$model->bid), array('class'=>'ui-btn-right')); ?>
 	</div>
