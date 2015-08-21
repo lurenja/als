@@ -13,7 +13,7 @@
 		<?php
 			$dataList = $dataProvider->getData();
 			foreach($dataList as $data){
-				echo '<li data-icon="false" data-ajax="false">',
+				echo '<li data-icon="false">',
 					//'<a href="" data-id="">'.$data->b_name.'</a>',
 					CHtml::link(CHtml::encode($data->b_name), array('view', 'id'=>$data->bid));
 					'</li>';

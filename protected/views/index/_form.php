@@ -62,6 +62,18 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'is_single'); ?>
+		<?php echo $form->textField($model,'is_single'); ?>
+		<?php echo $form->error($model,'is_single'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'serial_no'); ?>
+		<?php echo $form->textField($model,'serial_no',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->error($model,'serial_no'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'type'); ?>
 		<?php echo $form->textField($model,'type',array('size'=>4,'maxlength'=>4)); ?>
 		<?php echo $form->error($model,'type'); ?>

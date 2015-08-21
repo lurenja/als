@@ -34,6 +34,14 @@
 	<br />
 
 	<?php /*
+	<b><?php echo CHtml::encode($data->getAttributeLabel('is_single')); ?>:</b>
+	<?php echo CHtml::encode($data->is_single); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('serial_no')); ?>:</b>
+	<?php echo CHtml::encode($data->serial_no); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('type')); ?>:</b>
 	<?php echo CHtml::encode($data->type); ?>
 	<br />

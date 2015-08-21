@@ -1,27 +1,20 @@
 <?php
 
 /**
- * This is the model class for table "tbl_book".
+ * This is the model class for table "tbl_book_seq".
  *
- * The followings are the available columns in table 'tbl_book':
+ * The followings are the available columns in table 'tbl_book_seq':
  * @property string $bid
- * @property string $b_name
- * @property string $author
- * @property string $country
- * @property string $age
- * @property string $pub_date
- * @property string $pub_house
- * @property string $type
- * @property string $rectime
+ * @property string $serial_no
  */
-class Book extends CActiveRecord
+class BookSeq extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'tbl_book';
+		return 'tbl_book_seq';
 	}
 
 	/**
@@ -32,15 +25,12 @@ class Book extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			//array('rectime', 'required'),
+			array('bid, serial_no', 'required'),
 			array('bid', 'length', 'max'=>20),
-			array('b_name, author, pub_house', 'length', 'max'=>128),
-			array('country, age', 'length', 'max'=>32),
-			array('type', 'length', 'max'=>4),
-			array('pub_date', 'safe'),
+			array('serial_no', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('bid, b_name, author, country, age, pub_date, pub_house, type, rectime', 'safe', 'on'=>'search'),
+			array('bid, serial_no', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,14 +52,7 @@ class Book extends CActiveRecord
 	{
 		return array(
 			'bid' => 'Bid',
-			'b_name' => 'B Name',
-			'author' => 'Author',
-			'country' => 'Country',
-			'age' => 'Age',
-			'pub_date' => 'Pub Date',
-			'pub_house' => 'Pub House',
-			'type' => 'Type',
-			'rectime' => 'Rectime',
+			'serial_no' => 'Serial No',
 		);
 	}
 
@@ -92,14 +75,7 @@ class Book extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('bid',$this->bid,true);
-		$criteria->compare('b_name',$this->b_name,true);
-		$criteria->compare('author',$this->author,true);
-		$criteria->compare('country',$this->country,true);
-		$criteria->compare('age',$this->age,true);
-		$criteria->compare('pub_date',$this->pub_date,true);
-		$criteria->compare('pub_house',$this->pub_house,true);
-		$criteria->compare('type',$this->type,true);
-		$criteria->compare('rectime',$this->rectime,true);
+		$criteria->compare('serial_no',$this->serial_no,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -110,7 +86,7 @@ class Book extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Book the static model class
+	 * @return BookSeq the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

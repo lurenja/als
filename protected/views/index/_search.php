@@ -13,7 +13,7 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'bid'); ?>
-		<?php echo $form->textField($model,'bid',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($model,'bid',array('size'=>14,'maxlength'=>14)); ?>
 	</div>
 
 	<div class="row">
@@ -44,6 +44,16 @@
 	<div class="row">
 		<?php echo $form->label($model,'pub_house'); ?>
 		<?php echo $form->textField($model,'pub_house',array('size'=>60,'maxlength'=>128)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'is_single'); ?>
+		<?php echo $form->textField($model,'is_single'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'serial_no'); ?>
+		<?php echo $form->textField($model,'serial_no',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
 
 	<div class="row">

@@ -53,6 +53,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'pub_date',
 		/*
 		'pub_house',
+		'is_single',
+		'serial_no',
 		'type',
 		'rectime',
 		*/

@@ -1,7 +1,8 @@
 <?php
 
-class BookController extends Controller
+class IndexController extends Controller
 {
+	private $_btype;
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -62,20 +63,48 @@ class BookController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Book;
+		$book=new Book;
+		$bookForm = new BookForm;
+		$bookSeq = new BookSeq;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Book']))
+		if(isset($_POST['BookForm']))
 		{
-			$model->attributes=$_POST['Book'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->bid));
+			$bookForm->attributes=$_POST['BookForm'];
+			$time = gettimeofday();
+			$bookForm->bid = $time['sec'].$time['usec'];
+			if($bookForm->validate()){
+				$book->attributes = $bookForm->attributes;
+				if($book->save()){
+					$bookForm->serial_no = trim($bookForm->serial_no);
+					if(empty($bookForm->serial_no)){
+						$this->redirect(array('view','id'=>$book->bid));
+					}else{
+						$result = true;
+						$serialArray = explode(',', $bookForm->serial_no);
+						foreach($serialArray as $serialNo){
+							$bookSeq->bid = $book->bid;
+							$bookSeq->serial_no = $serialNo;
+							if($bookSeq->save()){
+								$bookSeq->setIsNewRecord(true);
+							}else{
+								$result = false;
+								break;
+							}
+						}
+						if($result){
+							$this->redirect(array('view','id'=>$book->bid));
+						}
+					}
+				}
+			}
 		}
 
+		$bookForm->is_new = true;
 		$this->render('create',array(
-			'model'=>$model,
+			'model'=>$bookForm,
 		));
 	}
 
@@ -122,9 +151,11 @@ class BookController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$model=new Book;
 		$dataProvider=new CActiveDataProvider('Book');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
 
@@ -152,10 +183,18 @@ class BookController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Book::model()->findByPk($id);
-		if($model===null)
+		$book=Book::model()->findByPk($id);
+		if($book===null)
 			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
+		$bookForm=new BookForm;
+		$bookForm->attributes = $book->attributes;
+		$serial_no = '';
+		$dataList = BookSeq::model()->findAllByAttributes(array('bid'=>$id));
+		foreach($dataList as $bean){
+			$serial_no .= ',['.$bean->serial_no.']';
+		}
+		$bookForm->serial_no = substr($serial_no, 1);
+		return $bookForm;
 	}
 
 	/**
@@ -169,5 +208,15 @@ class BookController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	protected function loadBookType(){
+		$this->_btype = BookType::model()->findAll();
+		return $this->_btype;
+	}
+	
+	protected function loadTypeName($typeId){
+		$this->_btype = BookType::model()->findByPk($typeId);
+		return $this->_btype->description;
 	}
 }

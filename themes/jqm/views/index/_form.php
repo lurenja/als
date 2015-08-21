@@ -4,7 +4,7 @@
 /* @var $form CActiveForm */
 ?>
 <div data-role="content">
-	<?php $form=$this->beginWidget('CActiveForm', array('id'=>'book-form', 'enableAjaxValidation'=>false,)); ?>
+	<?php $form=$this->beginWidget('CActiveForm', array('id'=>'book-form', 'enableAjaxValidation'=>true,));?>
 		<table>
 		<tbody>
 			<tr>
@@ -66,30 +66,19 @@
 				?>
 			</td>
 			</tr>
+			<tr>
+				<td><?php echo $form->labelEx($model,'serial_no'); ?></td>
+				<td><?php echo $form->textField($model,'serial_no',array('size'=>60,'maxlength'=>128)); ?></td>
+			</tr>
 		</tbody>
 		</table>
-		<div class="ui-grid-a custom_grid1">
-			<div class="ui-block-a">
-				<fieldset data-role="controlgroup" id="rdo-single" data-type="horizontal" data-mini="true">
-					<?php echo $form->radioButtonList($model, 'is_single', array(1=>"整本", 0=>"分册"), array('separator'=>'')); ?>
-				</fieldset>
-			</div>
-			<div class="ui-block-b">
-				<?php echo $form->textField($model, 'serial_no'); ?>
-			</div>
-		</div>
 		<div class="ui-grid-b"><?php echo $form->errorSummary($model); ?></div>
-		<?php echo CHtml::submitButton($model->isNewRecord ? '添加' : '保存'); ?>
+		<?php echo CHtml::submitButton($model->is_new ? '添加' : '保存'); ?>
 	<?php $this->endWidget(); ?>
 </div>
 <script type="text/javascript">
-$(function(){
-	//initSelect();
-	//$('INPUT[name="rdo-single"]').on('click', setIsSingle);
-	//initSingleRadio();
-});
 function setPubDate(){
 	var pubDate = $('#pub_year').val()+'-'+$('#pub_month').val()+'-01';
-	$('#Book_pub_date').val(pubDate);
+	$('#BookForm_pub_date').val(pubDate);
 }
 </script>

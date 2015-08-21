@@ -28,6 +28,8 @@ $this->menu=array(
 		'age',
 		'pub_date',
 		'pub_house',
+		'is_single',
+		'serial_no',
 		'type',
 		'rectime',
 	),
