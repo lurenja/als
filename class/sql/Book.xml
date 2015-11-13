@@ -1,0 +1,44 @@
+<sqlMap>
+	<sql id="loadAll">
+		<![CDATA[
+select * from tbl_book t order by t.bid
+		]]>
+	</sql>
+	<sql id="loadByID">
+		<![CDATA[
+SELECT t.bid,
+       t.b_name,
+       t.author,
+       t.country,
+       t.age,
+       t.pub_date,
+       t.pub_house,
+       t2.description as type,
+       t.rectime
+  FROM tbl_book t,
+       tbl_book_type t2
+ where t.type = t2.t_no
+   and t.bid = :bid;
+		]]>
+	</sql>
+  <sql id="insertBook">
+    <![CDATA[
+insert into tbl_book values(?,?,?,?,?,?,?,?,?)
+    ]]>
+  </sql>
+  <sql id="updateBook">
+    <![CDATA[
+update tbl_book t 
+set 
+    t.b_name = ?,
+    t.author = ?,
+    t.country = ?,
+    t.age = ?,
+    t.pub_date = ?,
+    t.pub_house = ?,
+    t.type = ?
+where
+    t.bid = ?
+    ]]>
+  </sql>
+</sqlMap>

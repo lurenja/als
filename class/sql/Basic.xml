@@ -1,0 +1,7 @@
+<sqlMap>
+	<sql id="loadBookType">
+		<![CDATA[
+SELECT t.t_no as id, t.description as name FROM tbl_book_type t order by t.t_no
+		]]>
+	</sql>
+</sqlMap>
