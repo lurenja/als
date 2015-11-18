@@ -78,10 +78,16 @@
 			</select>
 			</td>
 			</tr>
-			<!--<tr>
-				<td><?php //echo $bean->labels('serial_no'); ?></td>
-				<td><input type="text" name="serial_no" value=""></td>
-			</tr>-->
+			<?php if($bean->serial_no > 1 || empty($bean->serial_no)){ ?>
+			<tr>
+				<td><?php echo $bean->labels('serial_no'); ?></td>
+				<td><input type="number" pattern="[0-9]" name="serialNo" value="<?php echo $bean->serial_no; ?>"></td>
+			</tr>
+			<?php } ?>
+			<tr>
+				<td><?php echo $bean->labels('remarks'); ?></td>
+				<td><input type="text" name="remarks" value="<?php echo $bean->remarks; ?>"></td>
+			</tr>
 		</tbody>
 		</table>
 		<div class="ui-grid-b"><?php //echo $form->errorSummary($bean); ?></div>

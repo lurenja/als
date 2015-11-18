@@ -19,7 +19,7 @@
 	<div data-role="page">
 		<div data-role="header" data-position="fixed" id="pageone">
 			<h4>所有书籍</h4>
-			<?php //echo CHtml::link('新书', array('create', ''), array('class'=>'ui-btn-right')); ?>
+			<a href="create.php" class="ui-shadow ui-btn-right ui-corner-all">新书</a>
 		</div>
 		<div class="ui-content">
 			<ul data-role="listview" data-filter="true" data-inset="true" class="ui-content">
@@ -29,7 +29,9 @@
 				$bookList = $dao->loadAll();
 				foreach($bookList as $bean){
 					echo '<li data-icon="false">',
-					'<a href="update.php?bid=',$bean->bid,'" data-id="">'.$bean->b_name.'</a>',
+					'<a href="update.php?bid=',$bean->bid,'" data-id="">',
+					$bean->b_name,'&nbsp;-&nbsp;',$bean->author,
+					'</a>',
 					'</li>';
 				}
 				?>
