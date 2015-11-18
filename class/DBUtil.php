@@ -1,14 +1,13 @@
 <?php
-include_once 'LogUtil.php';
  //数据库交互类
 class DBUtil {
 	//SQL XML File Directory Array
 	static $sqlList = array();
 
 	function createPDO(){   //创建PDO对象
-		$pdoObj = new PDO(URL, USER, PASSWORD);
-        $pdoObj->exec('SET names utf8');
-        return $pdoObj;
+		$pdo = new PDO(URL, USER, PASSWORD);
+        $pdo->exec('SET names utf8');
+        return $pdo;
 	}
 
 	function freePDO($obj){ //清空PDO对象
@@ -31,10 +30,10 @@ class DBUtil {
         		}
         	}
         }else{
-            LogUtil::getLog()->info($sqlName. ': No File Found!');
+            error_log($sqlName. ': No File Found!');
         }
         if(empty($sqlString)){
-            LogUtil::getLog()->info($sqlName . ': No SQL Found!');
+            error_log($sqlName . ': No SQL Found!');
         }
         return $sqlString;
     }

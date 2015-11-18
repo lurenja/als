@@ -25,6 +25,8 @@ class Book
     var $pub_house;
     var $type;
     var $rectime;
+    var $serial_no;
+    var $remarks;
 
 	/**
 	 * @return string the associated database table name
@@ -49,6 +51,8 @@ class Book
 			'pub_house' => '出版社',
 			'type' => '类型',
 			'rectime' => '数据时间',
+			'serial_no' => '共N册',
+			'remarks' => '备注'
 		);
 		return $labels[$key];
 	}

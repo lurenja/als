@@ -1,78 +1,46 @@
 <?php 
-include_once 'DBUtil.php';
-include_once dirname(dirname(__FILE__)) . '/config.php';
+include_once 'GeneralDao.php';
 include_once 'bean/Book.php';
-class BookDao{
-	private $util;
-	function __construct(){
-		$this->util = new DBUtil();
-	}
+class BookDao extends GeneralDao{
+
 	//查询所有书籍
 	function loadAll(){
 		$result = array();
-		$sqlString = $this->util->loadSql('Book.loadAll');
-
-		$pdo = $this->util->createPDO();
-		$stmt = $pdo->prepare($sqlString);
-		$isDone = $stmt->execute();
-		$error = LogUtil::getPDOErr($stmt);
-		if(empty($error)){
-			$result = $stmt->fetchAll(PDO::FETCH_CLASS, 'Book');
-		}else{
-			LogUtil::getLog()->info($error);
+		try{
+			$result = $this->fetchClass('Book.loadAll', array(), 'Book');
+		}catch(Exception $e){
+			error_log($e);
 		}
-		$this->util->freePDO($pdo);
 		return $result;
 	}
-
+	//根据ID查询书籍
 	function loadByID($bid){
 		$book = new Book();
-		$sqlString = $this->util->loadSql('Book.loadByID');
-
-		$pdo = $this->util->createPDO();
-		$stmt = $pdo->prepare($sqlString);
-		$stmt->bindValue(':bid', $bid);
-		$isDone = $stmt->execute();
-		$error = LogUtil::getPDOErr($stmt);
-		if(empty($error)){
-			$book = $stmt->fetchObject('Book');
-		}else{
-			LogUtil::getLog()->info($error);
+		try{
+			$book = $this->fetchObj('Book.loadByID', array(':bid'=>$bid), 'Book');
+		}catch(Exception $e){
+			error_log($e);
 		}
-
-		$this->util->freePDO($pdo);
 		return $book;
 	}
-
+	//查询所有书籍类型
 	function loadBookType(){
 		$result = array();
-		$sqlString = $this->util->loadSql('Basic.loadBookType');
-
-		$pdo = $this->util->createPDO();
-		$stmt = $pdo->prepare($sqlString);
-		$stmt->execute();
-		$error = LogUtil::getPDOErr($stmt);
-		if(empty($error)){
-			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		}else{
-			LogUtil::getLog()->info($error);
+		try{
+			$result = $this->fetch('Basic.loadBookType', array());
+		}catch(Exception $e){
+			error_log($e);
 		}
-		$this->util->freePDO($pdo);
 		return $result;
 	}
-
+	//保存书籍
 	function saveBook($action, $param){
 		$sqlId = 'Book.'.$action.'Book';
-		$sqlString = $this->util->loadSql($sqlId);
-		
-		$pdo = $this->util->createPDO();
-		$stmt = $pdo->prepare($sqlString);
-		$stmt->execute($param);
-		$error = LogUtil::getPDOErr($stmt);
-		if(!empty($error)){
-			LogUtil::getLog()->info($error);
+		try{
+			$this->exec($sqlId, $param);
+		}catch(Exception $e){
+			error_log($e);
 		}
-		$this->util->freePDO($pdo);
 	}
 }
 ?>

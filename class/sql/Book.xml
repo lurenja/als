@@ -14,7 +14,9 @@ SELECT t.bid,
        t.pub_date,
        t.pub_house,
        t2.description as type,
-       t.rectime
+       t.rectime,
+       t.serial_no,
+       t.remarks
   FROM tbl_book t,
        tbl_book_type t2
  where t.type = t2.t_no
@@ -23,7 +25,19 @@ SELECT t.bid,
 	</sql>
   <sql id="insertBook">
     <![CDATA[
-insert into tbl_book values(?,?,?,?,?,?,?,?,?)
+insert into tbl_book
+  (bid,
+   b_name,
+   author,
+   country,
+   age,
+   pub_date,
+   pub_house,
+   type,
+   serial_no,
+   remarks)
+values
+  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ]]>
   </sql>
   <sql id="updateBook">
@@ -36,7 +50,9 @@ set
     t.age = ?,
     t.pub_date = ?,
     t.pub_house = ?,
-    t.type = ?
+    t.type = ?,
+    t.serial_no = ?,
+    t.remarks = ?
 where
     t.bid = ?
     ]]>
