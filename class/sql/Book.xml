@@ -57,4 +57,9 @@ where
     t.bid = ?
     ]]>
   </sql>
+  <sql id="deleteBook">
+    <![CDATA[
+delete from tbl_book where bid = :bid
+    ]]>
+  </sql>
 </sqlMap>

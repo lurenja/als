@@ -4,4 +4,21 @@
 SELECT t.t_no as id, t.description as name FROM tbl_book_type t order by t.t_no
 		]]>
 	</sql>
+	<sql id="insertBookType">
+		<![CDATA[
+insert into tbl_book_type (t_no, description) values (?, ?)
+		]]>
+	</sql>
+	<sql id="updateBookType">
+		<![CDATA[
+update tbl_book_type t
+   set t.description = ?
+ where t.t_no = ?
+		]]>
+	</sql>
+	<sql id="deleteBookType">
+		<![CDATA[
+delete from tbl_book_type where t_no = ?
+		]]>
+	</sql>
 </sqlMap>

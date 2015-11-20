@@ -26,16 +26,16 @@
 </div>
 <script type="text/javascript">
 $(function(){
-	$('button').on('click', function(event){
+	$('#submitBtn').on('click', function(event){
 		event.preventDefault();
-		updateForm();
+		createBook();
 	});
-	// $(document).bind("mobileinit", function() {
-	// 	// disable ajax nav
-	// 	$.mobile.ajaxEnabled=false
-	// });
+	$(document).bind("mobileinit", function() {
+		// disable ajax nav
+		$.mobile.ajaxEnabled=false
+	});
 });
-function updateForm(){
+function createBook(){
 	$('#book_form').attr('action', 'CreateAction.php').submit(); 
 }
 </script>
