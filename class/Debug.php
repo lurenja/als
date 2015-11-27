@@ -1,6 +1,6 @@
 <?php
 class Debug{
-    private $debug_dir = "D:/workspace/kms/logs/debug.txt";
+    private $debug_dir = "debug.txt";
     function logTxt($txt){
         $myfile = fopen($this->debug_dir, "a");
         fwrite($myfile, date('Y-m-d H:i:s')."\t");

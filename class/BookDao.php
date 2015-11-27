@@ -23,16 +23,7 @@ class BookDao extends GeneralDao{
 		}
 		return $book;
 	}
-	//查询所有书籍类型
-	function loadBookType(){
-		$result = array();
-		try{
-			$result = $this->fetch('Basic.loadBookType', array());
-		}catch(Exception $e){
-			error_log($e);
-		}
-		return $result;
-	}
+
 	//保存书籍
 	function saveBook($action, $param){
 		$sqlId = 'Book.'.$action.'Book';

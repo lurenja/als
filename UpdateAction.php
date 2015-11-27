@@ -9,12 +9,10 @@ switch ($_POST['oper']) {
 			$_POST['pubDate'], $_POST['pubHouse'], $_POST['type'], $serialNo, 
 			$_POST['remarks'], $_POST['bid']);
 		$dao->saveBook('update', $param);
-		header('Location: index.php');
 		break;
 	case 'delete':
 		$param = array(':bid'=>$_POST['bid']);
 		$dao->saveBook('delete', $param);
-		header('Location: index.php');
 		break;
 	default:
 		error_log('no action called');

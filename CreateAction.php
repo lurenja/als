@@ -7,5 +7,4 @@ array_push($param, $_POST['bid'], $_POST['bName'], $_POST['author'], $_POST['cou
 	$_POST['pubDate'], $_POST['pubHouse'], $_POST['type'], $serialNo, 
 	$_POST['remarks']);
 $dao->saveBook('insert', $param);
-header('Location: index.php');
 ?>

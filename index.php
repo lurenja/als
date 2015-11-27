@@ -20,7 +20,7 @@
 	<div data-role="page">
 		<div data-role="header" data-position="fixed" id="pageone">
 			<h4>所有书籍</h4>
-			<a href="create.php" data-ajax="false" class="ui-shadow ui-btn-right ui-corner-all">新书</a>
+			<a href="create.php" data-ajax="true" class="ui-shadow ui-btn-right ui-corner-all">新书</a>
 		</div>
 		<div data-role="content">
 			<ul data-role="listview" data-filter="true" data-inset="true" class="ui-content">
@@ -30,21 +30,15 @@
 				$bookList = $dao->loadAll();
 				foreach($bookList as $bean){
 					echo '<li data-icon="false">',
-					'<a href="update.php?bid=',$bean->bid,'" data-id="" data-ajax="false">',
+					'<a href="update.php?bid=',$bean->bid,'" data-id="">',
 					$bean->b_name,'&nbsp;-&nbsp;',$bean->author,
 					'</a>',
 					'</li>';
 				}
 				?>
 			</ul>
-			<a href="setting.php">设置</a>
 		</div>
-	</div>
-	<div data-role="panel" id="menu_panel" data-display="overlay">
-			<ul data-role="listview">
-				<li><a href="index.php">首页</a></li>
-				<li><a href="setting.php" data-ajax="true">设置</a></li>
-			</ul>
+		<?php include_once 'all_panel.html' ?>
 	</div>
 </body>
 </html>

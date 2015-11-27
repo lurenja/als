@@ -66,8 +66,10 @@
 					<td><?php echo $bean->labels('type'); ?></td>
 					<td>
 						<select name="type">
-							<?php 
-							foreach($dao->loadBookType() as $row){
+							<?php
+							include_once 'class/BasicDao.php';
+							$basicDao = new BasicDao();
+							foreach($basicDao->loadBookType() as $row){
 								if($bean->type == $row['name']){
 									echo '<option selected="selected" value="';
 								}else{

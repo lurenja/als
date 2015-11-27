@@ -16,46 +16,48 @@
 <title>书籍信息</title>
 </head>
 <body>
-<div data-role="page" data-add-back-btn="true" >
+<div data-role="page">
 	<div data-role="header" data-position="fixed">
-		<a href="index.php" data-rel="">返回</a>
+		<a href="index.php">返回</a>
 		<?php
 		include_once 'class/BookDao.php';
 		$dao = new BookDao();
 		$bean = $dao->loadByID($_GET['bid']);
 		?>
 		<h4>《<?php echo $bean->b_name; ?>》</h4>
-		<a href="#delDialog" data-rel="popup" class="ui-icon-delete ui-btn-icon-left" style="background-color: #c11b17; color:white;">删除</a>
-		<div data-role="popup" id="delDialog" data-position-to="window" data-dismissible="false" style="max-width:400px;">
+		<a href="#delDialog" data-rel="popup" class="ui-btn-del">删除</a>
+		<div data-role="popup" id="delDialog" data-position-to="window" data-transition="slidedown" data-dismissible="false" style="max-width:400px;">
 			<div role="main" class="ui-content" style="text-align:center;">
 				<p class="ui-title" style="">确认删除书籍？</p>
 				<p style="font-size: .6em;color: #c11b17;">删除后数据无法恢复</p>
-				<a href="#" onclick="delBook()" class="ui-btn ui-corner-all ui-btn-inline" style="background-color: #c11b17; color:white;" data-transition="flow">删除</a>
-				<a href="#" class="ui-btn ui-corner-all ui-btn-inline" data-rel="back">取消</a>
+				<a href="#" onclick="delBook()" class="ui-btn ui-corner-all ui-btn-inline ui-btn-del ui-mini" data-transition="flow">删除</a>
+				<a href="#" class="ui-btn ui-corner-all ui-btn-inline ui-mini" data-rel="back">取消</a>
 			</div>
 		</div>
 	</div>
-	<?php require_once '_form.php'; ?>
+	<?php require_once 'book_form.php'; ?>
+	<script type="text/javascript">
+	$(document).on('pagecreate', function(e){
+		$('#submitBtn').on('click', function(event){
+			event.preventDefault();
+			updateBook();
+		});
+	});
+	function updateBook(){
+		$('#oper').val('update');
+		// $('#book_form').attr('action', 'UpdateAction.php').submit();
+		$.post('UpdateAction.php', $('#book_form').serialize(), function(result){
+			$.mobile.changePage('index.php',{reload:true});
+		}, 'text');
+	}
+	function delBook(){
+		$('#oper').val('delete');
+		// $('#book_form').attr('action', 'UpdateAction.php').submit();
+		$.post('UpdateAction.php', $('#book_form').serialize(), function(result){
+			$.mobile.changePage('index.php');
+		}, 'text');
+	}
+	</script>
 </div>
-<script type="text/javascript">
-$(function(){
-	$('#submitBtn').on('click', function(event){
-		event.preventDefault();
-		updateBook();
-	});
-	$(document).bind("mobileinit", function() {
-		// disable ajax nav
-		$.mobile.ajaxEnabled=false
-	});
-});
-function updateBook(){
-	$('#oper').val('update');
-	$('#book_form').attr('action', 'UpdateAction.php').submit(); 
-}
-function delBook(){
-	$('#oper').val('delete');
-	$('#book_form').attr('action', 'UpdateAction.php').submit();
-}
-</script>
 </body>
 </html>

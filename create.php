@@ -10,34 +10,32 @@
 <title>书籍信息</title>
 </head>
 <body>
-<div data-role="page" data-add-back-btn="true" >
+<div data-role="page">
 	<div data-role="header" data-position="fixed">
-		<a href="" data-rel="back">首页</a>
-		<?php
-		include_once 'class/BookDao.php';
-		$dao = new BookDao();
-		$bean = new Book();
-		$time = gettimeofday();
-		$bean->bid = $time['sec'].$time['usec'];
-		?>
+		<a href="index.php">返回</a>
 		<h4>新书</h4>
 	</div>
-	<?php require_once '_form.php'; ?>
+	<?php
+	include_once 'class/bean/Book.php';
+	$bean = new Book();
+	$time = gettimeofday();
+	$bean->bid = $time['sec'].$time['usec'];
+	require_once 'book_form.php'; 
+	?>
+	<script type="text/javascript">
+	$(document).on('pagecreate', function(event){
+		$('#submitBtn').on('click', function(event){
+			event.preventDefault();
+			createBook();
+		});
+	});
+	function createBook(){
+		// $('#book_form').attr('action', 'CreateAction.php').submit();
+		$.post('CreateAction.php', $('#book_form').serialize(), function(data){
+			$.mobile.changePage('index.php', {reload:true});
+		}, 'text');
+	}
+	</script>
 </div>
-<script type="text/javascript">
-$(function(){
-	$('#submitBtn').on('click', function(event){
-		event.preventDefault();
-		createBook();
-	});
-	$(document).bind("mobileinit", function() {
-		// disable ajax nav
-		$.mobile.ajaxEnabled=false
-	});
-});
-function createBook(){
-	$('#book_form').attr('action', 'CreateAction.php').submit(); 
-}
-</script>
 </body>
 </html>
