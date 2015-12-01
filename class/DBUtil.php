@@ -1,8 +1,6 @@
 <?php
  //数据库交互类
 class DBUtil {
-	//SQL XML File Directory Array
-	static $sqlList = array();
 
 	function createPDO(){   //创建PDO对象
 		$pdo = new PDO(URL, USER, PASSWORD);
