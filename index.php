@@ -3,10 +3,15 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-	<link rel="stylesheet" type="text/css" href="jquerymobile/jquery.mobile-1.4.5.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" media="screen">
 	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
-	<script type="text/javascript" src="jquerymobile/jquery.mobile-1.4.5.js"></script>
+	<style type="text/css">
+	a {
+		color: black;
+	}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.0.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 	$(function(){
 		$(document).on('swiperight', '.ui-page', function(event){
@@ -17,28 +22,38 @@
 	<title>Index Page</title>
 </head>
 <body>
-	<div data-role="page">
-		<div data-role="header" data-position="fixed" id="pageone">
-			<h4>所有书籍</h4>
-			<a href="create.php" data-ajax="true" class="ui-shadow ui-btn-right ui-corner-all">新书</a>
+	<div class="container">
+		<div class="row header" id="pageone">
+			<div class="col-xs-2">
+				<div class="btn-group">
+					<span class="glyphicon glyphicon-menu-hamburger"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
+					<ul class="dropdown-menu">
+						<li><a href="index.php">首页</a></li>
+						<li><a href="setting.php">设置</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-xs-8"><h4>所有书籍</h4></div>
+			<div class="col-xs-2"><a href="create.php" class="glyphicon glyphicon-plus" aria-hidden="true"></a></div>
 		</div>
-		<div data-role="content">
-			<ul data-role="listview" data-filter="true" data-inset="true" class="ui-content">
-				<?php
-				include_once 'class/BookDao.php';
-				$dao = new BookDao();
-				$bookList = $dao->loadAll();
-				foreach($bookList as $bean){
-					echo '<li data-icon="false">',
-					'<a href="update.php?bid=',$bean->bid,'" data-id="">',
-					$bean->b_name,'&nbsp;-&nbsp;',$bean->author,
-					'</a>',
-					'</li>';
-				}
-				?>
-			</ul>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="list-group">
+					<?php
+					include_once 'class/BookDao.php';
+					$dao = new BookDao();
+					$bookList = $dao->loadAll();
+					foreach($bookList as $bean){
+						echo '<a class="list-group-item" href="update.php?bid=',$bean->bid,'" data-id="">',
+						$bean->b_name,'&nbsp;-&nbsp;',$bean->author,
+						'</a>';
+					}
+					?>
+				</div>
+			</div>
 		</div>
-		<?php include_once 'all_panel.html' ?>
+		<?php //include_once 'all_panel.html' ?>
 	</div>
 </body>
 </html>

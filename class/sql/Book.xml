@@ -13,6 +13,7 @@ SELECT t.bid,
        t.age,
        t.pub_date,
        t.pub_house,
+       t.type as type_id,
        t2.description as type,
        t.rectime,
        t.serial_no,
@@ -42,8 +43,8 @@ values
   </sql>
   <sql id="updateBook">
     <![CDATA[
-update tbl_book t 
-set 
+update tbl_book t
+set
     t.b_name = ?,
     t.author = ?,
     t.country = ?,

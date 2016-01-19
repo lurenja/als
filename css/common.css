@@ -1,13 +1,32 @@
-TABLE{
+body{
+	font-family: Microsoft Yahei;
+}
+table {
 	width: 100%;
 }
-
-@media all and (max-width: 50em) {
-	.custom_grid1 .ui-block-a { width: 50%; }
-	.custom_grid1 .ui-block-b
+.ui-btn-del {
+	background-color: #c11b17 !important;
+	color: white !important;
 }
-
-.ui-btn-del{
-	background-color: #c11b17 !important; 
-	color:white !important;
+a:link {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+}
+a:hover {
+	color: black;
+	text-decoration: none;
+}
+.header > div {
+	text-align: center;
+}
+.header .glyphicon {
+	cursor: pointer;
+	margin-top: 12px;
+}
+.dropdown-menu {
+	max-height: 200px;
+	min-width: 100px;
+	overflow: auto;
 }

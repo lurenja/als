@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-<link rel="stylesheet" type="text/css" href="jquerymobile/jquery.mobile-1.4.5.css">
-<link rel="stylesheet" type="text/css" href="css/common.css">
-<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
-<script type="text/javascript" src="jquerymobile/jquery.mobile-1.4.5.js"></script>
-<title>书籍信息</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<script type="text/javascript" src="js/jquery-1.12.0.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<title>书籍信息</title>
 </head>
 <body>
-<div data-role="page">
-	<div data-role="header" data-position="fixed">
-		<a href="index.php">返回</a>
-		<h4>新书</h4>
-	</div>
-	<?php
-	include_once 'class/bean/Book.php';
-	$bean = new Book();
-	$time = gettimeofday();
-	$bean->bid = $time['sec'].$time['usec'];
-	require_once 'book_form.php'; 
-	?>
-	<script type="text/javascript">
-	$(document).on('pagecreate', function(event){
-		$('#submitBtn').on('click', function(event){
-			event.preventDefault();
-			createBook();
+	<div class="container">
+		<div class="row header">
+			<div class="col-xs-2"><a href="index.php" class="glyphicon glyphicon-menu-left"></a></div>
+			<div class="col-xs-8"><h4>新书</h4></div>
+		</div>
+		<?php
+		include_once 'class/bean/Book.php';
+		$bean = new Book();
+		$time = gettimeofday();
+		$bean->bid = $time['sec'].$time['usec'];
+		require_once 'book_form.php';
+		?>
+		<script type="text/javascript">
+		$(function(){
+			$('#submitBtn').on('click', function(event){
+				event.preventDefault();
+				createBook();
+			});
 		});
-	});
-	function createBook(){
+		function createBook(){
 		// $('#book_form').attr('action', 'CreateAction.php').submit();
-		$.post('CreateAction.php', $('#book_form').serialize(), function(data){
-			$.mobile.changePage('index.php', {reload:true});
-		}, 'text');
-	}
-	</script>
-</div>
+			$.post('CreateAction.php', $('#book_form').serialize(), function(data){
+				window.location.href="index.php";
+			}, 'text');
+		}
+		</script>
+	</div>
 </body>
 </html>

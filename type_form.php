@@ -3,32 +3,36 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-	<link rel="stylesheet" type="text/css" href="jquerymobile/jquery.mobile-1.4.5.css">
-	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
-	<script type="text/javascript" src="jquerymobile/jquery.mobile-1.4.5.js"></script>
 	<title>类型编辑</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<script type="text/javascript" src="js/jquery-1.12.0.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div data-role="page">
-	<div data-role="header" data-position="fixed" data-add-back-btn="true">
-		<a href="" data-rel="back" class="">返回</a>
-		<h4>书籍类型</h4>
+<div class="container">
+	<div class="row header">
+		<div class="col-xs-2">
+			<a href="setting.php" class="glyphicon glyphicon-menu-left"></a>
+		</div>
+		<div class="col-xs-8"><h4>书籍类型</h4></div>
 	</div>
-	<div class="ui-content">
-		<form id="booktype_form" action="SetAction.php" method="post">
-			<input type="hidden" name="oper" value="">
-			<div class="ui-field-contain">
-				<label for="id_input">编号</label><input type="text" id="id_input" name="id"/>
-			</div>
-			<div class="ui-field-contain">
-				<label for="name_input">名称</label><input type="text" id="name_input" name="name" />
-			</div>
-			<button class="ui-btn ui-corner-all" onclick="submit()">保存</button>
-			<button id="delBtn" class="ui-btn ui-btn-del ui-corner-all" 
-				style="" onclick="deleteType()">删除</button>
-		</form>
-	</div>
+	<form id="booktype_form" action="SetAction.php" method="post" class="form-horizontal">
+		<input type="hidden" name="oper" value="">
+		<div class="form-group">
+			<label for="id_input" class="col-xs-3 control-label">编号</label>
+			<div class="col-xs-9"><input type="text" id="id_input" name="id" class="form-control"/></div>
+		</div>
+		<div class="form-group">
+			<label for="name_input" class="col-xs-3 control-label">名称</label>
+			<div class="col-xs-9"><input type="text" id="name_input" name="name" class="form-control"/></div>
+		</div>
+		<div class="form-group" role="group">
+			<div class="col-xs-3"></div>
+			<button class="btn btn-default col-xs-6" onclick="submit()">保存</button>
+			<button id="delBtn" class="btn btn-danger col-xs-3" onclick="deleteType()">删除</button>
+		</div>
+	</form>
 	<script type="text/javascript">
 		//阻止表单按钮默认事件
 		$('#booktype_form button').on('click', function(event){
