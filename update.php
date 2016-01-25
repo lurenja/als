@@ -28,7 +28,7 @@
 			<h4>《<?php echo $bean->b_name; ?>》</h4>
 		</div>
 		<div class="col-xs-2">
-			<a class="glyphicon glyphicon-trash" style="color: #c11b17;" data-toggle="modal" data-target="#delDialog"></a>
+			<a class="glyphicon glyphicon-trash ui-btn-del" data-toggle="modal" data-target="#delDialog"></a>
 			<div id="delDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div role="main" class="modal-content" style="text-align:center;">
 					<div class="modal-body">

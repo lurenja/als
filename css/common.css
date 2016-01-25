@@ -1,12 +1,14 @@
-body{
+body {
 	font-family: Microsoft Yahei;
 }
 table {
 	width: 100%;
 }
 .ui-btn-del {
-	background-color: #c11b17 !important;
-	color: white !important;
+	color: #c11b17;
+}
+a {
+	color: black;
 }
 a:link {
 	text-decoration: none;

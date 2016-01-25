@@ -20,5 +20,24 @@ class BasicDao extends GeneralDao {
 			error_log($e);
 		}
 	}
+
+	function loadAuthor(){
+		$result = array();
+		try {
+			$result = $this->fetch('Basic.loadAuthor', array());
+		} catch (Exception $e) {
+			error_log($e);
+		}
+		return $result;
+	}
+
+	function saveAuthor(){
+		$sqlId = 'Basic.'.$action.'Author';
+		try {
+			$this->exec($sqlId, $param);
+		} catch (Exception $e) {
+			error_log($e);
+		}
+	}
 }
 ?>

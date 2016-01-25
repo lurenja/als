@@ -16,6 +16,22 @@
 			<a href="setting.php" class="glyphicon glyphicon-menu-left"></a>
 		</div>
 		<div class="col-xs-8"><h4>书籍类型</h4></div>
+		<div class="col-xs-2">
+			<a class="glyphicon glyphicon-trash ui-btn-del" data-toggle="modal" data-target="#delDialog"></a>
+			<div id="delDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div role="main" class="modal-content" style="text-align:center;">
+					<div class="modal-body">
+						<p class="ui-title" style="">确认删除书籍？</p>
+						<p style="font-size: .6em;color: #c11b17;">删除后数据无法恢复</p>
+					</div>
+					<div class="modal-footer">
+						<a href="#" class="btn btn-danger" onclick="deleteType()">删除</a>
+						<a href="#" class="btn btn-default" data-dismiss="modal">取消</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
 	</div>
 	<form id="booktype_form" action="SetAction.php" method="post" class="form-horizontal">
 		<input type="hidden" name="oper" value="">
@@ -27,11 +43,7 @@
 			<label for="name_input" class="col-xs-3 control-label">名称</label>
 			<div class="col-xs-9"><input type="text" id="name_input" name="name" class="form-control"/></div>
 		</div>
-		<div class="form-group" role="group">
-			<div class="col-xs-3"></div>
-			<button class="btn btn-default col-xs-6" onclick="submit()">保存</button>
-			<button id="delBtn" class="btn btn-danger col-xs-3" onclick="deleteType()">删除</button>
-		</div>
+		<button class="btn btn-default col-xs-12" onclick="submit()">保存</button>
 	</form>
 	<script type="text/javascript">
 		//阻止表单按钮默认事件
@@ -40,7 +52,8 @@
 		});
 		$('#booktype_form input[name="oper"]').val(sessionStorage.getItem('typeOper'));
 		if(sessionStorage.getItem('typeOper') == 'insert'){
-			$('#delBtn').hide();
+			var $divs = $('div.header').find('div').eq(2).hide();
+			// $('#delBtn').hide();
 		}else if(sessionStorage.getItem('typeOper') == 'update'){
 			var bean = JSON.parse(sessionStorage.getItem('typeBean'));
 			$('#id_input').val(bean['id']);

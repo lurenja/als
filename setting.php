@@ -6,6 +6,14 @@
 	<title>参数设置</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<style type="text/css">
+		table.table td{
+			cursor: pointer;
+		}
+		.panel-icon {
+			float:right;
+		}
+	</style>
 	<script type="text/javascript" src="js/jquery-1.12.0.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
@@ -17,9 +25,10 @@
 	}
 	//更新书籍类型
 	function updateType(obj){
+		var $tds = $(obj).find('td');
 		var bean = {
-			'id': $(obj).text(),
-			'name': $(obj).parent().next().text()
+			'id': $tds.eq(0).text(),
+			'name': $tds.eq(1).text()
 		};
 		sessionStorage.setItem('typeBean', JSON.stringify(bean));
 		sessionStorage.setItem('typeOper', 'update');
@@ -30,36 +39,61 @@
 <body>
 	<div class="container">
 		<div class="row header">
-			<div class="col-xs-12"><h5>参数设置</h5></div>
+			<div class="col-xs-2"><a href="index.php" class="glyphicon glyphicon-home"></a></div>
+			<div class="col-xs-8"><h5>参数设置</h5></div>
 		</div>
 		<div data-role="row">
 			<div class="col-xs-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					书籍类型
-					<a href="javascript:void(0);" onclick="newType()"
-						class="glyphicon glyphicon-plus" style="float:right;"></a>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						书籍类型
+						<a href="javascript:void(0);" onclick="newType()"
+						class="glyphicon glyphicon-plus panel-icon"></a>
+					</div>
+					<div class="panel-body">
+						<table class="table table-hover">
+							<thead>
+								<tr><th>编号</th><th>名称</th></tr>
+							</thead>
+							<tbody>
+								<?php
+								include_once 'class/BasicDao.php';
+								$dao = new BasicDao();
+								$typeList = $dao->loadBookType();
+								foreach ($typeList as $row) {
+									echo '<tr onclick="updateType(this)"><td>'
+									,$row['id'],'</td><td>'
+									,$row['name'],'</td></tr>';
+								}
+								?>
+							</tbody>
+						</table>
+					</div>
 				</div>
-				<div class="panel-body">
-					<table class="table table-hover">
-						<thead>
-							<tr><th>编号</th><th>名称</th></tr>
-						</thead>
-						<tbody>
-							<?php
-							include_once 'class/BookDao.php';
-							$dao = new BookDao();
-							$typeList = $dao->loadBookType();
-							foreach ($typeList as $row) {
-								echo '<tr>','<td><a href="javascript:void(0);" onclick="updateType(this)">'
-								,$row['id'],'</a></td><td>'
-								,$row['name'],'</td>','</tr>';
-							}
-							?>
-						</tbody>
-					</table>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						作者列表
+						<a href="javascript:void(0);" onclick="" class="glyphicon glyphicon-plus panel-icon"></a>
+					</div>
+					<div class="panel-body">
+						<table class="table table-hover">
+							<thead>
+								<tr><th>姓名</th><th>国籍</th><th>时代</th></tr>
+							</thead>
+							<tbody>
+								<?php
+								$alist = $dao->loadAuthor();
+								foreach ($alist as $row) {
+									echo '<tr><td>'
+									,$row['name'],'</td><td>'
+									,$row['country'],'</td><td>'
+									,$row['age'],'</td></tr>';
+								}
+								?>
+							</tbody>
+						</table>
+					</div>
 				</div>
-			</div>
 			</div>
 		</div>
 		<script type="text/javascript">

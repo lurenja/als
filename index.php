@@ -3,23 +3,11 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<title>Index Page</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" media="screen">
 	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<style type="text/css">
-	a {
-		color: black;
-	}
-	</style>
 	<script type="text/javascript" src="js/jquery-1.12.0.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-	$(function(){
-		$(document).on('swiperight', '.ui-page', function(event){
-			$('#menu_panel').panel('open');
-		});
-	});
-	</script>
-	<title>Index Page</title>
 </head>
 <body>
 	<div class="container">
