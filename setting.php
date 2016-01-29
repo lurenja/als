@@ -34,6 +34,10 @@
 		sessionStorage.setItem('typeOper', 'update');
 		window.location.href = 'type_form.php';
 	}
+	function newAuthor(){
+		sessionStorage.setItem('setParam', 'insertAuthor');
+		window.location.href = 'author_form.php';
+	}
 	</script>
 </head>
 <body>
@@ -97,11 +101,6 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-		$(function(){
-			// $(document).on('swiperight', '.ui-page', function(event){ //绑定右滑全局菜单
-			// 	$('#menu_panel').panel('open');
-			// });
-		});
 		</script>
 	</div>
 </body>

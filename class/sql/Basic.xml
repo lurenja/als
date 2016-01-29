@@ -4,6 +4,11 @@
 SELECT t.t_no as id, t.description as name FROM tbl_book_type t order by t.t_no
 		]]>
 	</sql>
+	<sql id="getBookType">
+	<![CDATA[
+select t.t_no as id, t.description as name from tbl_book_type t where t.t_no = ?
+	]]>
+	</sql>
 	<sql id="insertBookType">
 		<![CDATA[
 insert into tbl_book_type (t_no, description) values (?, ?)
@@ -26,9 +31,14 @@ delete from tbl_book_type where t_no = ?
 select t.name, t.country, t.age from tbl_author t order by t.country, t.age, t.name
 		]]>
 	</sql>
+	<sql id="getAuthor">
+		<![CDATA[
+select t.name, t.country, t.age from tbl_author t where t.aid = ?
+		]]>
+	</sql>
 	<sql id="insertAuthor">
 	<![CDATA[
-insert into tbl_author (id, name, country, age) values (?, ?, ?, ?)
+insert into tbl_author (aid, name, country, age) values (?, ?, ?, ?)
 	]]>
 	</sql>
 	<sql id="updateAuthor">
@@ -37,12 +47,12 @@ update tbl_author t
    set t.name = ?,
        t.country = ?,
        t.age = ?
- where t.id = ?
+ where t.aid = ?
 	]]>
 	</sql>
-	<sql>
+	<sql id="deleteAuthor">
 	<![CDATA[
-delete from tbl_author t where t.id = ?
+delete from tbl_author t where t.aid = ?
 	]]>
 	</sql>
 </sqlMap>
