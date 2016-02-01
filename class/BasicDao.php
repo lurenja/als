@@ -41,7 +41,7 @@ class BasicDao extends GeneralDao {
 		return $result;
 	}
     //查询单个作者信息
-	function loadAuthor(){
+	function getAuthor($id){
 		$result = array();
 		try {
 			$result = $this->fetch('Basic.loadAuthor', array());
@@ -51,7 +51,7 @@ class BasicDao extends GeneralDao {
 		return $result;
 	}
 	//保存作者信息
-	function saveAuthor(){
+	function saveAuthor($action, $param){
 		$sqlId = 'Basic.'.$action.'Author';
 		try {
 			$this->exec($sqlId, $param);

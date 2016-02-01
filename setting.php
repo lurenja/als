@@ -35,7 +35,19 @@
 		window.location.href = 'type_form.php';
 	}
 	function newAuthor(){
-		sessionStorage.setItem('setParam', 'insertAuthor');
+		sessionStorage.setItem('oper', 'insertAuthor');
+		window.location.href = 'author_form.php';
+	}
+	function updateAuthor(obj) {
+		var $tds = $(obj).find('td');
+		var bean = {
+			'aid': $tds.eq(0).text(),
+			'name': $tds.eq(1).text(),
+			'country': $tds.eq(2).text(),
+			'age': $tds.eq(3).text()
+		}
+		sessionStorage.setItem('oper', 'updateAuthor');
+		sessionStorage.setItem('bean', JSON.stringify(bean));
 		window.location.href = 'author_form.php';
 	}
 	</script>
@@ -77,18 +89,19 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						作者列表
-						<a href="javascript:void(0);" onclick="" class="glyphicon glyphicon-plus panel-icon"></a>
+						<a href="javascript:void(0);" onclick="newAuthor()" class="glyphicon glyphicon-plus panel-icon"></a>
 					</div>
 					<div class="panel-body">
 						<table class="table table-hover">
 							<thead>
-								<tr><th>姓名</th><th>国籍</th><th>时代</th></tr>
+								<tr><th>ID</th><th>姓名</th><th>国籍</th><th>时代</th></tr>
 							</thead>
 							<tbody>
 								<?php
 								$alist = $dao->loadAuthor();
 								foreach ($alist as $row) {
-									echo '<tr><td>'
+									echo '<tr onclick="updateAuthor(this)"><td>'
+									,$row['aid'],'</td><td>'
 									,$row['name'],'</td><td>'
 									,$row['country'],'</td><td>'
 									,$row['age'],'</td></tr>';

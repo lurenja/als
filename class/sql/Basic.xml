@@ -28,7 +28,7 @@ delete from tbl_book_type where t_no = ?
 	</sql>
 	<sql id="loadAuthor">
 		<![CDATA[
-select t.name, t.country, t.age from tbl_author t order by t.country, t.age, t.name
+select t.aid, t.name, t.country, t.age from tbl_author t order by t.country, t.age, t.name
 		]]>
 	</sql>
 	<sql id="getAuthor">

@@ -22,6 +22,12 @@ switch ($_POST['oper']) {
 		$list = $dao->getBookType($_POST['id']);
 		echo json_encode($list);
 		break;
+	case 'insertAuthor':
+		$time = gettimeofday();
+		$id = $time['sec'].$time['usec'];
+		$param = array($id, $_POST['name'], $_POST['country'], $_POST['age']);
+		$dao->saveAuthor('insert', $param);
+		break;
 	default:
 		error_log('no action defined');
 		break;
