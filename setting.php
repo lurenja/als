@@ -19,23 +19,35 @@
 	<script type="text/javascript">
 	//新增书籍类型
 	function newType(){
-		sessionStorage.removeItem('typeBean');
-		sessionStorage.setItem('typeOper', 'insert');
+		sessionStorage.removeItem('bean');
+		sessionStorage.setItem('oper', 'insert');
 		window.location.href = 'type_form.php';
 	}
 	//更新书籍类型
-	function updateType(obj){
-		var $tds = $(obj).find('td');
+	function updateType(trObj){
+		var $tds = $(trObj).find('td');
 		var bean = {
 			'id': $tds.eq(0).text(),
 			'name': $tds.eq(1).text()
 		};
-		sessionStorage.setItem('typeBean', JSON.stringify(bean));
-		sessionStorage.setItem('typeOper', 'update');
+		sessionStorage.setItem('bean', JSON.stringify(bean));
+		sessionStorage.setItem('oper', 'update');
 		window.location.href = 'type_form.php';
 	}
-	function newAuthor(){
-		sessionStorage.setItem('setParam', 'insertAuthor');
+	function newAuthor(){ //新增作者
+		sessionStorage.setItem('oper', 'insert');
+		window.location.href = 'author_form.php';
+	}
+	function updateAuthor(trObj) { //编辑作者信息
+		var $tds = $(trObj).find('td');
+		var bean = {
+			'aid': $tds.eq(0).text(),
+			'name': $tds.eq(1).text(),
+			'country': $tds.eq(2).text(),
+			'age': $tds.eq(3).text()
+		}
+		sessionStorage.setItem('oper', 'update');
+		sessionStorage.setItem('bean', JSON.stringify(bean));
 		window.location.href = 'author_form.php';
 	}
 	</script>
@@ -77,18 +89,19 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						作者列表
-						<a href="javascript:void(0);" onclick="" class="glyphicon glyphicon-plus panel-icon"></a>
+						<a href="javascript:void(0);" onclick="newAuthor()" class="glyphicon glyphicon-plus panel-icon"></a>
 					</div>
 					<div class="panel-body">
 						<table class="table table-hover">
 							<thead>
-								<tr><th>姓名</th><th>国籍</th><th>时代</th></tr>
+								<tr><th>ID</th><th>姓名</th><th>国籍</th><th>时代</th></tr>
 							</thead>
 							<tbody>
 								<?php
 								$alist = $dao->loadAuthor();
 								foreach ($alist as $row) {
-									echo '<tr><td>'
+									echo '<tr onclick="updateAuthor(this)"><td>'
+									,$row['aid'],'</td><td>'
 									,$row['name'],'</td><td>'
 									,$row['country'],'</td><td>'
 									,$row['age'],'</td></tr>';

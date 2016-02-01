@@ -5,8 +5,8 @@ switch ($_POST['oper']) {
 	case 'update':
 		$param = array();
 		$serialNo = empty($_POST['serialNo'])?1:$_POST['serialNo'];
-		array_push($param, $_POST['bName'], $_POST['author'], $_POST['country'], $_POST['age'], 
-			$_POST['pubDate'], $_POST['pubHouse'], $_POST['type'], $serialNo, 
+		array_push($param, $_POST['bName'], $_POST['author'],
+			$_POST['pubDate'], $_POST['pubHouse'], $_POST['type'], $serialNo,
 			$_POST['remarks'], $_POST['bid']);
 		$dao->saveBook('update', $param);
 		break;

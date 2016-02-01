@@ -18,12 +18,14 @@ class Book
 {
 	var $bid;
     var $b_name;
-    var $author;
+    var $aid;
+    var $aname;
     var $country;
     var $age;
     var $pub_date;
     var $pub_house;
-    var $type;
+    var $type_id;
+    var $tname;
     var $rectime;
     var $serial_no;
     var $remarks;

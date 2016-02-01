@@ -23,7 +23,7 @@
 				</div>
 			</div>
 			<div class="col-xs-8"><h4>所有书籍</h4></div>
-			<div class="col-xs-2"><a href="create.php" class="glyphicon glyphicon-plus" aria-hidden="true"></a></div>
+			<div class="col-xs-2"><a href="book_create.php" class="glyphicon glyphicon-plus" aria-hidden="true"></a></div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
@@ -33,8 +33,8 @@
 					$dao = new BookDao();
 					$bookList = $dao->loadAll();
 					foreach($bookList as $bean){
-						echo '<a class="list-group-item" href="update.php?bid=',$bean->bid,'" data-id="">',
-						$bean->b_name,'&nbsp;-&nbsp;',$bean->author,
+						echo '<a class="list-group-item" href="book_update.php?bid=',$bean->bid,'" data-id="">',
+						$bean->b_name,'&nbsp;-&nbsp;',$bean->aname,
 						'</a>';
 					}
 					?>

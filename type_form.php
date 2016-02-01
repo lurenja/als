@@ -49,21 +49,22 @@
 		$('#booktype_form button').on('click', function(event){
 			event.preventDefault();
 		});
-		$('#booktype_form input[name="oper"]').val(sessionStorage.getItem('typeOper'));
-		if(sessionStorage.getItem('typeOper') == 'insert'){
+		var oper = sessionStorage.getItem('oper');
+		if(oper == 'insert'){
 			var $divs = $('div.header').find('div').eq(2).hide();
-		}else if(sessionStorage.getItem('typeOper') == 'update'){
-			var bean = JSON.parse(sessionStorage.getItem('typeBean'));
+		}else if(oper == 'update'){
+			var bean = JSON.parse(sessionStorage.getItem('bean'));
 			$('#id_input').val(bean['id']);
 			$('#name_input').val(bean['name']);
 		}
+		$('#booktype_form input[name="oper"]').val(oper+'BookType');
 		//提交表单
 		function submit(){
 			$('#booktype_form').submit();
 		}
 		//删除类型
 		function deleteType(){
-			$('#booktype_form input[name="oper"]').val('delete');
+			$('#booktype_form input[name="oper"]').val('deleteBookType');
 			$('#booktype_form').submit();
 		}
 	</script>

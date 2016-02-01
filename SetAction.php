@@ -2,10 +2,6 @@
 include_once 'class/BasicDao.php';
 $dao = new BasicDao();
 switch ($_POST['oper']) {
-	case 'getBookType':
-		$list = $dao->getBookType($_POST['id']);
-		echo json_encode($list);
-		break;
 	case 'insertBookType':
 		$param = array($_POST['id'], $_POST['name']);
 		$dao->saveBookType('insert', $param);
@@ -18,12 +14,22 @@ switch ($_POST['oper']) {
 		$param = array($_POST['id']);
 		$dao->saveBookType('delete', $param);
 		break;
-	case 'getAuthor':
-		$list = $dao->getBookType($_POST['id']);
-		echo json_encode($list);
+	case 'insertAuthor':
+		$time = gettimeofday();
+		$id = $time['sec'].$time['usec'];
+		$param = array($id, $_POST['name'], $_POST['country'], $_POST['age']);
+		$dao->saveAuthor('insert', $param);
+		break;
+	case 'updateAuthor':
+		$param = array($_POST['name'], $_POST['country'], $_POST['age'], $_POST['aid']);
+		$dao->saveAuthor('update', $param);
+		break;
+	case 'deleteAuthor':
+		$param = array($_POST['aid']);
+		$dao->saveAuthor('delete', $param);
 		break;
 	default:
-		error_log('no action defined');
+		error_log('No action defined!');
 		break;
 }
 header('Location: setting.php');

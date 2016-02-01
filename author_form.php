@@ -34,16 +34,17 @@
 	</div>
 	<form id="author_form" action="SetAction.php" method="post" class="form-horizontal">
 		<input type="hidden" name="oper" value="">
+		<input type="hidden" name="aid" value="">
 		<div class="form-group">
-			<label for="id_input" class="col-xs-3 control-label">姓名</label>
+			<label for="name_input" class="col-xs-3 control-label">姓名</label>
 			<div class="col-xs-9"><input type="text" id="name_input" name="name" class="form-control"/></div>
 		</div>
 		<div class="form-group">
-			<label for="name_input" class="col-xs-3 control-label">国籍</label>
+			<label for="country_input" class="col-xs-3 control-label">国籍</label>
 			<div class="col-xs-9"><input type="text" id="country_input" name="country" class="form-control"/></div>
 		</div>
 		<div class="form-group">
-			<label for="name_input" class="col-xs-3 control-label">时代</label>
+			<label for="age_input" class="col-xs-3 control-label">时代</label>
 			<div class="col-xs-9"><input type="text" id="age_input" name="age" class="form-control"/></div>
 		</div>
 		<button class="btn btn-default col-xs-12" onclick="submit()">保存</button>
@@ -53,21 +54,24 @@
 		$('#author_form button').on('click', function(event){
 			event.preventDefault();
 		});
-		$('#author_form input[name="oper"]').val(sessionStorage.getItem('typeOper'));
-		if(sessionStorage.getItem('typeOper') == 'insert'){
+		var oper = sessionStorage.getItem('oper');
+		if(oper == 'insert'){
 			var $divs = $('div.header').find('div').eq(2).hide();
-		}else if(sessionStorage.getItem('typeOper') == 'update'){
-			var bean = JSON.parse(sessionStorage.getItem('typeBean'));
-			$('#id_input').val(bean['id']);
+		}else if(oper == 'update'){
+			var bean = JSON.parse(sessionStorage.getItem('bean'));
+			$('input[name="aid"]').val(bean['aid']);
 			$('#name_input').val(bean['name']);
+			$('#country_input').val(bean['country']);
+			$('#age_input').val(bean['age']);
 		}
+		$('#author_form input[name="oper"]').val(oper+'Author');
 		//提交表单
 		function submit(){
 			$('#author_form').submit();
 		}
 		//删除类型
 		function deleteType(){
-			$('#author_form input[name="oper"]').val('delete');
+			$('#author_form input[name="oper"]').val('deleteAuthor');
 			$('#author_form').submit();
 		}
 	</script>

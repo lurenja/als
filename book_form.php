@@ -1,7 +1,10 @@
 <?php
 /* @var $bean Book */
 ?>
-<!-- <div data-role="content"> -->
+<?php
+include_once 'class/BasicDao.php';
+$dao = new BasicDao();
+?>
 <form id="book_form" method="post" class="form-horizontal">
 	<input type="hidden" id="oper" name="oper" value="" />
 	<input type="hidden" name="bid" value="<?php echo $bean->bid; ?>" />
@@ -14,10 +17,25 @@
 	<div class="form-group">
 		<label class="col-xs-3 control-label"><?php echo $bean->labels('author'); ?></label>
 		<div class="col-xs-9">
-			<input type="text" name="author" class="form-control" value="<?php echo $bean->author; ?>">
+			<div class="btn-group">
+				<button id="pub_year" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+					<?php echo empty($bean->aid)?'作者':$bean->aname; ?>
+				</button>
+				<ul class="dropdown-menu">
+					<?php
+					$list = $dao->loadAuthor();
+					$content = $aid = '';
+					foreach ($list as $row) {
+						$content .= '<li><a href="#" onclick="setAuthor(this, \''. $row['aid']. '\')">'. $row['name']. '</a></li>';
+					}
+					echo $content;
+					?>
+				</ul>
+			</div>
+			<input type="hidden" name="aid" class="form-control" value="<?php echo $bean->aid; ?>">
 		</div>
 	</div>
-	<div class="form-group">
+	<!-- <div class="form-group">
 		<label class="col-xs-3 control-label"><?php echo $bean->labels('country'); ?></label>
 		<div class="col-xs-9">
 			<input type="text" name="country" class="form-control" value="<?php echo $bean->country; ?>">
@@ -28,7 +46,7 @@
 		<div class="col-xs-9">
 			<input type="text" name="age" class="form-control" value="<?php echo $bean->age; ?>">
 		</div>
-	</div>
+	</div> -->
 	<div class="form-group">
 		<label class="col-xs-3 control-label"><?php echo $bean->labels('pub_date'); ?></label>
 		<div class="col-xs-9">
@@ -73,29 +91,22 @@
 		<label class="col-xs-3 control-label"><?php echo $bean->labels('type'); ?></label>
 		<div class="col-xs-9">
 			<div class="dropdown">
-				<?php
-					include_once 'class/BasicDao.php';
-					$basicDao = new BasicDao();
-					$list = $basicDao->loadBookType();
-					$content = '';
-					$typeId = '';
-					foreach($list as $row){
-						if($row['name'] == $bean->type){
-							$typeId = $row['id'];
-						}
-						$content .= '<li><a href="#" onclick="setType(this, \''. $row['id'] .'\')">'
-							. $row['name']. '</a></li>';
-					}
-				?>
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
 						aria-haspopup="false" aria-expanded="false">
-					<?php echo empty($bean->type)?'类型':$bean->type; ?>
+					<?php echo empty($bean->type_id)?'类型':$bean->tname; ?>
 				</button>
 				<ul class="dropdown-menu">
-					<?php echo $content; ?>
+					<?php
+					$list = $dao->loadBookType();
+					$content = '';
+					foreach($list as $row){
+						$content .= '<li><a href="#" onclick="setType(this, \''. $row['id'] .'\')">'. $row['name']. '</a></li>';
+					}
+					echo $content;
+					?>
 				</ul>
 			</div>
-			<input type="hidden" name="type" value="<?php echo $typeId; ?>"/>
+			<input type="hidden" name="type" value="<?php echo $bean->type_id; ?>"/>
 		</div>
 	</div>
 	<div class="form-group">
@@ -127,5 +138,9 @@ function setPubDate(e){
 function setType(e, typeId){
 	setButton(e);
 	$('input[name="type"]').val(typeId);
+}
+function setAuthor(e, aid) {
+	setButton(e);
+	$('input[name="author"]').val(aid);
 }
 </script>
