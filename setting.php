@@ -34,19 +34,32 @@
 		sessionStorage.setItem('oper', 'update');
 		window.location.href = 'type_form.php';
 	}
+<<<<<<< HEAD
 	function newAuthor(){ //新增作者
 		sessionStorage.setItem('oper', 'insert');
 		window.location.href = 'author_form.php';
 	}
 	function updateAuthor(trObj) { //编辑作者信息
 		var $tds = $(trObj).find('td');
+=======
+	function newAuthor(){
+		sessionStorage.setItem('oper', 'insertAuthor');
+		window.location.href = 'author_form.php';
+	}
+	function updateAuthor(obj) {
+		var $tds = $(obj).find('td');
+>>>>>>> 8e356334b17b3e482ec450f10e8f47b55c1d659b
 		var bean = {
 			'aid': $tds.eq(0).text(),
 			'name': $tds.eq(1).text(),
 			'country': $tds.eq(2).text(),
 			'age': $tds.eq(3).text()
 		}
+<<<<<<< HEAD
 		sessionStorage.setItem('oper', 'update');
+=======
+		sessionStorage.setItem('oper', 'updateAuthor');
+>>>>>>> 8e356334b17b3e482ec450f10e8f47b55c1d659b
 		sessionStorage.setItem('bean', JSON.stringify(bean));
 		window.location.href = 'author_form.php';
 	}

@@ -28,6 +28,12 @@ switch ($_POST['oper']) {
 		$param = array($_POST['aid']);
 		$dao->saveAuthor('delete', $param);
 		break;
+	case 'insertAuthor':
+		$time = gettimeofday();
+		$id = $time['sec'].$time['usec'];
+		$param = array($id, $_POST['name'], $_POST['country'], $_POST['age']);
+		$dao->saveAuthor('insert', $param);
+		break;
 	default:
 		error_log('No action defined!');
 		break;

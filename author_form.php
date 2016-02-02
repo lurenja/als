@@ -55,9 +55,16 @@
 			event.preventDefault();
 		});
 		var oper = sessionStorage.getItem('oper');
+<<<<<<< HEAD
 		if(oper == 'insert'){
 			var $divs = $('div.header').find('div').eq(2).hide();
 		}else if(oper == 'update'){
+=======
+		$('#author_form input[name="oper"]').val(oper);
+		if(oper == 'insertAthor'){
+			var $divs = $('div.header').find('div').eq(2).hide();
+		}else if(oper == 'updateAuthor'){
+>>>>>>> 8e356334b17b3e482ec450f10e8f47b55c1d659b
 			var bean = JSON.parse(sessionStorage.getItem('bean'));
 			$('input[name="aid"]').val(bean['aid']);
 			$('#name_input').val(bean['name']);
