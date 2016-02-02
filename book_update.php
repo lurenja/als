@@ -51,6 +51,7 @@
 			event.preventDefault();
 			updateBook();
 		});
+		$('#author_div').find('a').hide();
 	});
 	function updateBook(){
 		$('#oper').val('update');

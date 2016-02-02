@@ -8,12 +8,13 @@
 	<link rel="stylesheet" type="text/css" href="css/common.css">
 	<script type="text/javascript" src="js/jquery-1.12.0.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
 </head>
 <body>
 <div class="container">
 	<div class="row header">
 		<div class="col-xs-2">
-			<a href="setting.php" class="glyphicon glyphicon-menu-left"></a>
+			<a href="javascript:void(0);" onclick="back()" class="glyphicon glyphicon-menu-left"></a>
 		</div>
 		<div class="col-xs-8"><h4>作者信息</h4></div>
 		<div class="col-xs-2">
@@ -33,8 +34,9 @@
 		</div>
 	</div>
 	<form id="author_form" action="SetAction.php" method="post" class="form-horizontal">
-		<input type="hidden" name="oper" value="">
-		<input type="hidden" name="aid" value="">
+		<input type="hidden" name="oper" value="" />
+		<input type="hidden" name="aid" value="" />
+		<input type="hidden" name="lastUrl" value="" />
 		<div class="form-group">
 			<label for="name_input" class="col-xs-3 control-label">姓名</label>
 			<div class="col-xs-9"><input type="text" id="name_input" name="name" class="form-control"/></div>
@@ -50,21 +52,15 @@
 		<button class="btn btn-default col-xs-12" onclick="submit()">保存</button>
 	</form>
 	<script type="text/javascript">
+	$(function(){
 		//阻止表单按钮默认事件
 		$('#author_form button').on('click', function(event){
 			event.preventDefault();
 		});
 		var oper = sessionStorage.getItem('oper');
-<<<<<<< HEAD
 		if(oper == 'insert'){
 			var $divs = $('div.header').find('div').eq(2).hide();
 		}else if(oper == 'update'){
-=======
-		$('#author_form input[name="oper"]').val(oper);
-		if(oper == 'insertAthor'){
-			var $divs = $('div.header').find('div').eq(2).hide();
-		}else if(oper == 'updateAuthor'){
->>>>>>> 8e356334b17b3e482ec450f10e8f47b55c1d659b
 			var bean = JSON.parse(sessionStorage.getItem('bean'));
 			$('input[name="aid"]').val(bean['aid']);
 			$('#name_input').val(bean['name']);
@@ -72,15 +68,17 @@
 			$('#age_input').val(bean['age']);
 		}
 		$('#author_form input[name="oper"]').val(oper+'Author');
-		//提交表单
-		function submit(){
-			$('#author_form').submit();
-		}
-		//删除类型
-		function deleteType(){
-			$('#author_form input[name="oper"]').val('deleteAuthor');
-			$('#author_form').submit();
-		}
+		$('input[name="lastUrl"]').val(document.referrer);
+	});
+	//提交表单
+	function submit(){
+		$('#author_form').submit();
+	}
+	//删除类型
+	function deleteType(){
+		$('#author_form input[name="oper"]').val('deleteAuthor');
+		$('#author_form').submit();
+	}
 	</script>
 </div>
 </body>

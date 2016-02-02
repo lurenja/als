@@ -1,7 +1,10 @@
 <sqlMap>
 	<sql id="loadAll">
 		<![CDATA[
-select t.bid, t.b_name, t1.name as aname from tbl_book t, tbl_author t1 where t.author = t1.aid order by t.bid
+select t.bid, t.b_name, t1.name as aname
+  from tbl_book t, tbl_author t1
+ where t.author = t1.aid
+ order by t.bid desc
 		]]>
 	</sql>
 	<sql id="loadByID">
@@ -37,7 +40,7 @@ insert into tbl_book
    serial_no,
    remarks)
 values
-  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  (?, ?, ?, ?, ?, ?, ?, ?)
     ]]>
   </sql>
   <sql id="updateBook">

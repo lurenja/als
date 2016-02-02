@@ -34,32 +34,19 @@
 		sessionStorage.setItem('oper', 'update');
 		window.location.href = 'type_form.php';
 	}
-<<<<<<< HEAD
 	function newAuthor(){ //新增作者
 		sessionStorage.setItem('oper', 'insert');
 		window.location.href = 'author_form.php';
 	}
 	function updateAuthor(trObj) { //编辑作者信息
 		var $tds = $(trObj).find('td');
-=======
-	function newAuthor(){
-		sessionStorage.setItem('oper', 'insertAuthor');
-		window.location.href = 'author_form.php';
-	}
-	function updateAuthor(obj) {
-		var $tds = $(obj).find('td');
->>>>>>> 8e356334b17b3e482ec450f10e8f47b55c1d659b
 		var bean = {
 			'aid': $tds.eq(0).text(),
 			'name': $tds.eq(1).text(),
 			'country': $tds.eq(2).text(),
 			'age': $tds.eq(3).text()
 		}
-<<<<<<< HEAD
 		sessionStorage.setItem('oper', 'update');
-=======
-		sessionStorage.setItem('oper', 'updateAuthor');
->>>>>>> 8e356334b17b3e482ec450f10e8f47b55c1d659b
 		sessionStorage.setItem('bean', JSON.stringify(bean));
 		window.location.href = 'author_form.php';
 	}
@@ -107,13 +94,13 @@
 					<div class="panel-body">
 						<table class="table table-hover">
 							<thead>
-								<tr><th>ID</th><th>姓名</th><th>国籍</th><th>时代</th></tr>
+								<tr><th style="display:none;">ID</th><th>姓名</th><th>国籍</th><th>时代</th></tr>
 							</thead>
 							<tbody>
 								<?php
 								$alist = $dao->loadAuthor();
 								foreach ($alist as $row) {
-									echo '<tr onclick="updateAuthor(this)"><td>'
+									echo '<tr onclick="updateAuthor(this)"><td style="display:none;">'
 									,$row['aid'],'</td><td>'
 									,$row['name'],'</td><td>'
 									,$row['country'],'</td><td>'

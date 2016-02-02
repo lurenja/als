@@ -29,3 +29,7 @@ function initSelect(){
 	}
 	document.getElementById('pub_month').appendChild(frag);
 }
+
+function back() {
+	window.history.go(-1);
+}

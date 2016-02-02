@@ -30,7 +30,6 @@
 			});
 		});
 		function createBook(){
-		// $('#book_form').attr('action', 'CreateAction.php').submit();
 			$.post('CreateAction.php', $('#book_form').serialize(), function(data){
 				window.location.href="index.php";
 			}, 'text');

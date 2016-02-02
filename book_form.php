@@ -16,9 +16,9 @@ $dao = new BasicDao();
 	</div>
 	<div class="form-group">
 		<label class="col-xs-3 control-label"><?php echo $bean->labels('author'); ?></label>
-		<div class="col-xs-9">
+		<div class="col-xs-3">
 			<div class="btn-group">
-				<button id="pub_year" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
 					<?php echo empty($bean->aid)?'作者':$bean->aname; ?>
 				</button>
 				<ul class="dropdown-menu">
@@ -34,19 +34,10 @@ $dao = new BasicDao();
 			</div>
 			<input type="hidden" name="aid" class="form-control" value="<?php echo $bean->aid; ?>">
 		</div>
-	</div>
-	<!-- <div class="form-group">
-		<label class="col-xs-3 control-label"><?php echo $bean->labels('country'); ?></label>
-		<div class="col-xs-9">
-			<input type="text" name="country" class="form-control" value="<?php echo $bean->country; ?>">
+		<div id="author_div" class="col-xs-6">
+			<a href="author_form.php" class="glyphicon glyphicon-plus" style="margin-top: 10px;" title="New Author"></a>
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="col-xs-3 control-label"><?php echo $bean->labels('age'); ?></label>
-		<div class="col-xs-9">
-			<input type="text" name="age" class="form-control" value="<?php echo $bean->age; ?>">
-		</div>
-	</div> -->
 	<div class="form-group">
 		<label class="col-xs-3 control-label"><?php echo $bean->labels('pub_date'); ?></label>
 		<div class="col-xs-9">
@@ -141,6 +132,6 @@ function setType(e, typeId){
 }
 function setAuthor(e, aid) {
 	setButton(e);
-	$('input[name="author"]').val(aid);
+	$('input[name="aid"]').val(aid);
 }
 </script>

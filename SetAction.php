@@ -19,6 +19,12 @@ switch ($_POST['oper']) {
 		$id = $time['sec'].$time['usec'];
 		$param = array($id, $_POST['name'], $_POST['country'], $_POST['age']);
 		$dao->saveAuthor('insert', $param);
+		if(!empty($_POST['lastUrl'])){
+			header('Location:'.$_POST['lastUrl']);
+			exit();
+		}else{
+			back();
+		}
 		break;
 	case 'updateAuthor':
 		$param = array($_POST['name'], $_POST['country'], $_POST['age'], $_POST['aid']);
@@ -28,15 +34,12 @@ switch ($_POST['oper']) {
 		$param = array($_POST['aid']);
 		$dao->saveAuthor('delete', $param);
 		break;
-	case 'insertAuthor':
-		$time = gettimeofday();
-		$id = $time['sec'].$time['usec'];
-		$param = array($id, $_POST['name'], $_POST['country'], $_POST['age']);
-		$dao->saveAuthor('insert', $param);
-		break;
 	default:
 		error_log('No action defined!');
 		break;
 }
-header('Location: setting.php');
+if($_POST['oper'] != 'insertAuthor') {
+
+}
+header('Location:setting.php');
 ?>
