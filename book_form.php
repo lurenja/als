@@ -35,7 +35,7 @@ $dao = new BasicDao();
 			<input type="hidden" name="aid" class="form-control" value="<?php echo $bean->aid; ?>">
 		</div>
 		<div id="author_div" class="col-xs-6">
-			<a href="author_form.php" class="glyphicon glyphicon-plus" style="margin-top: 10px;" title="New Author"></a>
+			<a href="javascript:void(0);" onclick="newAuthor()" class="glyphicon glyphicon-plus" style="margin-top: 10px;" title="New Author"></a>
 		</div>
 	</div>
 	<div class="form-group">
@@ -75,7 +75,7 @@ $dao = new BasicDao();
 	<div class="form-group">
 		<label class="col-xs-3 control-label"><?php echo $bean->labels('pub_house'); ?></label>
 		<div class="col-xs-9">
-			<input type="text" name="pubHouse" class="form-control" value="<?php echo $bean->pub_house; ?>">
+			<input type="text" id="pub_h_input" name="pubHouse" class="form-control" autocomplete="off" value="<?php echo $bean->pub_house; ?>">
 		</div>
 	</div>
 	<div class="form-group">
@@ -115,6 +115,19 @@ $dao = new BasicDao();
 </form>
 <!-- </div> -->
 <script type="text/javascript">
+$(function(){
+	$('#pub_h_input').typeahead({
+		source: function (query, process) {
+			$.post('AjaxAction.php', {'key': query}, function (data) {
+				var results = new Array();
+				$.each(data, function (key, value) {
+					results.push(value);
+				});
+				process(results);
+			}, 'json');
+		}
+	});
+});
 function setButton(e){
 	$a = $(e);
 	var $button = $a.closest('ul').prev('button');
@@ -133,5 +146,9 @@ function setType(e, typeId){
 function setAuthor(e, aid) {
 	setButton(e);
 	$('input[name="aid"]').val(aid);
+}
+function newAuthor(){ //新增作者
+	sessionStorage.setItem('oper', 'insert');
+	window.location.href = 'author_form.php';
 }
 </script>

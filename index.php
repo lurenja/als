@@ -41,7 +41,6 @@
 				</div>
 			</div>
 		</div>
-		<?php //include_once 'all_panel.html' ?>
 	</div>
 </body>
 </html>

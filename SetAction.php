@@ -22,8 +22,6 @@ switch ($_POST['oper']) {
 		if(!empty($_POST['lastUrl'])){
 			header('Location:'.$_POST['lastUrl']);
 			exit();
-		}else{
-			back();
 		}
 		break;
 	case 'updateAuthor':
@@ -37,9 +35,6 @@ switch ($_POST['oper']) {
 	default:
 		error_log('No action defined!');
 		break;
-}
-if($_POST['oper'] != 'insertAuthor') {
-
 }
 header('Location:setting.php');
 ?>

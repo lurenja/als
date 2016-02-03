@@ -11,16 +11,6 @@ class BasicDao extends GeneralDao {
 		}
 		return $result;
 	}
-	//查询单个书籍类型信息
-	function getBookType($id){
-		$result = array();
-		try {
-			$result = $this->fetch('Basic.getBookType', array($id));
-		} catch (Exception $e) {
-			error_log($e);
-		}
-		return $result;
-	}
 	//保存书籍类型
 	function saveBookType($action, $param){
 		$sqlId = 'Basic.'.$action.'BookType';
@@ -40,16 +30,6 @@ class BasicDao extends GeneralDao {
 		}
 		return $result;
 	}
-    //查询单个作者信息
-	function getAuthor($id){
-		$result = array();
-		try {
-			$result = $this->fetch('Basic.loadAuthor', array());
-		} catch (Exception $e) {
-			error_log($e);
-		}
-		return $result;
-	}
 	//保存作者信息
 	function saveAuthor($action, $param){
 		$sqlId = 'Basic.'.$action.'Author';
@@ -58,6 +38,17 @@ class BasicDao extends GeneralDao {
 		} catch (Exception $e) {
 			error_log($e);
 		}
+	}
+	//Load pub_house history
+	function loadHouse($name){
+		$result = array();
+		$name = $name.'%';
+		try{
+			$result = $this->fetch('Basic.loadPubHouse', array($name));
+		}catch (Exception $e){
+			error_log($e);
+		}
+		return $result;
 	}
 }
 ?>

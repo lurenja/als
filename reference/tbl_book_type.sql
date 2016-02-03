@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015-11-20 17:20:37
+-- 生成日期: 2016-02-03 11:30:31
 -- 服务器版本: 5.1.73-community
 -- PHP 版本: 5.3.29
 
@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 -- 表的结构 `tbl_book_type`
 --
 
-DROP TABLE IF EXISTS `tbl_book_type`;
 CREATE TABLE IF NOT EXISTS `tbl_book_type` (
   `t_no` varchar(6) NOT NULL,
   `description` varchar(128) DEFAULT NULL,
@@ -34,16 +33,10 @@ CREATE TABLE IF NOT EXISTS `tbl_book_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 插入之前先把表清空（truncate） `tbl_book_type`
---
-
-TRUNCATE TABLE `tbl_book_type`;
---
 -- 转存表中的数据 `tbl_book_type`
 --
 
 INSERT INTO `tbl_book_type` (`t_no`, `description`) VALUES
-('a1', '测试更新1'),
 ('i1', '小说'),
 ('j1', '书法'),
 ('j2', '绘画'),

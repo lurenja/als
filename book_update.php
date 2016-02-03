@@ -10,7 +10,6 @@
 	<style type="text/css">
 	#delDialog a{
 		font-size: .8em;
-		/*font-weight: normal;*/
 	}
 	</style>
 	<title>书籍信息</title>
@@ -55,14 +54,12 @@
 	});
 	function updateBook(){
 		$('#oper').val('update');
-		// $('#book_form').attr('action', 'UpdateAction.php').submit();
 		$.post('UpdateAction.php', $('#book_form').serialize(), function(result){
 			window.location.href = 'index.php';
 		}, 'text');
 	}
 	function delBook(){
 		$('#oper').val('delete');
-		// $('#book_form').attr('action', 'UpdateAction.php').submit();
 		$.post('UpdateAction.php', $('#book_form').serialize(), function(result){
 			window.location.href = 'index.php';
 		}, 'text');

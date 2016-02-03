@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2016-01-25 09:47:08
+-- 生成日期: 2016-02-03 11:47:48
 -- 服务器版本: 5.1.73-community
 -- PHP 版本: 5.3.29
 
@@ -34,6 +34,13 @@ CREATE TABLE IF NOT EXISTS `tbl_author` (
   `rectime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`aid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `tbl_author`
+--
+
+INSERT INTO `tbl_author` (`aid`, `name`, `country`, `age`, `rectime`) VALUES
+('1454471090310900', '褚人获', '中国', '清朝', '2016-02-03 03:44:50');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

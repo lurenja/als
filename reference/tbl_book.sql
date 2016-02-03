@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015-11-20 17:19:52
+-- 生成日期: 2016-02-03 11:46:39
 -- 服务器版本: 5.1.73-community
 -- PHP 版本: 5.3.29
 
@@ -26,13 +26,10 @@ SET time_zone = "+00:00";
 -- 表的结构 `tbl_book`
 --
 
-DROP TABLE IF EXISTS `tbl_book`;
 CREATE TABLE IF NOT EXISTS `tbl_book` (
   `bid` varchar(20) NOT NULL DEFAULT '',
   `b_name` varchar(128) NOT NULL DEFAULT '',
   `author` varchar(128) DEFAULT NULL,
-  `country` varchar(32) DEFAULT NULL,
-  `age` varchar(32) DEFAULT NULL,
   `pub_date` date DEFAULT NULL,
   `pub_house` varchar(128) DEFAULT NULL,
   `type` varchar(4) DEFAULT NULL,
@@ -46,8 +43,8 @@ CREATE TABLE IF NOT EXISTS `tbl_book` (
 -- 转存表中的数据 `tbl_book`
 --
 
-INSERT INTO `tbl_book` (`bid`, `b_name`, `author`, `country`, `age`, `pub_date`, `pub_house`, `type`, `rectime`, `serial_no`, `remarks`) VALUES
-('1439883823437751', '史记', '司马迁', '中国', '汉', '1950-10-01', '测试出版社更新', 'k1', '2015-08-18 07:43:43', 1, '少一册');
+INSERT INTO `tbl_book` (`bid`, `b_name`, `author`, `pub_date`, `pub_house`, `type`, `rectime`, `serial_no`, `remarks`) VALUES
+('1454471090435900', '隋唐演义', '1454471090310900', '1981-02-01', '云南人民出版社', 'i1', '2016-02-03 03:45:57', 2, '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

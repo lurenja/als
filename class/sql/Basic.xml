@@ -4,11 +4,6 @@
 SELECT t.t_no as id, t.description as name FROM tbl_book_type t order by t.t_no
 		]]>
 	</sql>
-	<sql id="getBookType">
-	<![CDATA[
-select t.t_no as id, t.description as name from tbl_book_type t where t.t_no = ?
-	]]>
-	</sql>
 	<sql id="insertBookType">
 		<![CDATA[
 insert into tbl_book_type (t_no, description) values (?, ?)
@@ -31,11 +26,6 @@ delete from tbl_book_type where t_no = ?
 select t.aid, t.name, t.country, t.age from tbl_author t order by t.country, t.name
 		]]>
 	</sql>
-	<sql id="getAuthor">
-		<![CDATA[
-select t.name, t.country, t.age from tbl_author t where t.aid = ?
-		]]>
-	</sql>
 	<sql id="insertAuthor">
 	<![CDATA[
 insert into tbl_author (aid, name, country, age) values (?, ?, ?, ?)
@@ -53,6 +43,11 @@ update tbl_author t
 	<sql id="deleteAuthor">
 	<![CDATA[
 delete from tbl_author where aid = ?
+	]]>
+	</sql>
+	<sql id="loadPubHouse">
+	<![CDATA[
+select distinct t.pub_house as name from tbl_book t where upper(t.pub_house) like upper(?) order by 1
 	]]>
 	</sql>
 </sqlMap>
