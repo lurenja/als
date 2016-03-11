@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+    link(rel='stylesheet', type='text/css', href='bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='css/common.css')
+    script(type='text/javascript', src='js/jquery-1.12.0.js')
+    script(type='text/javascript', src='bootstrap/js/bootstrap.min.js')
+    script(type='text/javascript', src='bootstrap/js/bootstrap3-typeahead.js')
+    title 新书
+  body
+    .container
+      .row.header
+        .col-xs-2
+          a.glyphicon.glyphicon-menu-left(href='index')
+        .col-xs-8
+          h4 新书
+      include book_form
+      script.
+        $(function(){
+          $('#submitBtn').on('click', function(event){
+            event.preventDefault();
+            createBook();
+          });
+        });
+        function createBook(){
+          //- $.post('createBook', $('#book_form').serialize(), function(data){
+          //-   window.location.href="/";
+          //- }, 'text');
+          $('#book_form').attr('action', 'createBook').submit();
+        }

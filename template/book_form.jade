@@ -1,0 +1,106 @@
+form#book_form.form-horizontal(method='post')
+  input#oper(type='hidden', name='oper', value='')
+  //- input(type='hidden', name='bid', value='')
+  .form-group
+    label.col-xs-3.control-label “ISBN”
+    .col-xs-6
+      input.form-control(type='text', name='bid', value='')
+    .col-xs-3
+      a.glyphicon.glyphicon-search(href='javascript:void(0);', onclick='getISBN()', style='margin-top: 10px;', title='Get Info')
+  .form-group
+    label.col-xs-3.control-label 书名
+    .col-xs-9
+      input.form-control(type='text', name='bName', value='')
+  .form-group
+    label.col-xs-3.control-label 作者
+    .col-xs-6
+      input.form-control(type='text', name='author', id='author_input' value='')
+    #author_div.col-xs-3
+      a.glyphicon.glyphicon-plus(href='javascript:void(0);', onclick='newAuthor()', style='margin-top: 10px;', title='New Author')
+  .form-group
+    label.col-xs-3.control-label 出版日期
+    .col-xs-9
+      input.form-control(type='month', name='pubDate', value='')
+  .form-group
+    label.col-xs-3.control-label 出版社
+    .col-xs-9
+      input.form-control(type='text', name='pubHouse', id='pub_h_input', autocomplete='off', value='')
+  .form-group
+    label.col-xs-3.control-label 类型
+    .col-xs-9
+      .dropdown
+        button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='false', aria-expanded='false') 类型
+        ul#type_list.dropdown-menu
+          //- li
+          //-   a(href='#', onclick="setType(this, \''. $row['id'] .'\')"): 类型
+      input(type='hidden', name='type', value='')
+  .form-group
+    label.col-xs-3.control-label 册数
+    .col-xs-9
+      input.form-control(type='number', pattern='[0-9]', name='serialNo', value='')
+  .form-group
+    label.col-xs-3.control-label 备注
+    .col-xs-9
+      input.form-control(type='text', name='remarks', value='')
+  button#submitBtn.btn.btn-default.form-control 保存
+script.
+  $(function(){
+    $('#pub_h_input').typeahead({
+      source: function (query, process) {
+        $.get('loadPubHouse', {'key': query}, function (data) {
+          var results = new Array();
+          $.each(data, function (key, value) {
+            results.push(value);
+          });
+          process(results);
+        }, 'json');
+      }
+    });
+    $('#author_input').typehead({
+      source: function(query, process) {
+        $.get('loadAuthor', {'key': query}, function(data){
+          var results = new Array();
+          $.each(data, function(key, value) {
+            results.push(value);
+          })
+        });
+      }
+    });
+    $.get('loadType',{},function(data){
+      for(var i=0, size=data.length; i<size; i++) {
+        $a = $('<a>');
+        $a.text(data[i].name).attr('onclick', 'setType(this, \''+ data[i].id +'\')').attr('href', 'javascript:void(0);');
+        $li = $('<li>');
+        $li.append($a);
+        $('#type_list').append($li);
+      }
+    },'json');
+  });
+  function setButton(e){ //设置下拉按钮文字
+    $a = $(e);
+    var $button = $a.closest('ul').prev('button');
+    $button.text($a.text());
+    return;
+  }
+  function setType(e, typeId){ //选择类别触发方法
+    setButton(e);
+    $('input[name="type"]').val(typeId);
+  }
+  function newAuthor(){ //新增作者
+    sessionStorage.setItem('oper', 'insert');
+    window.location.href = 'author_form.php';
+  }
+  function getISBN(){
+    var isbn = $('input[name="bid"]').val();
+    var url = 'http://api.36wu.com/ISBN/GetIsbnInfo?authkey=8510a6b198f0494295cefff5be5305f1&format=json&isbn='+isbn;
+    $.get(url, {}, function(result){
+      alert('start getting');
+      if(result.status == 200){
+        var data = result.data;
+        $('input[name="bName"]').val(data.title);
+        $('input[name="author"]').val(data.author?data.author:'No Info');
+        $('input[name="pubDate"]').val(data.pubdate);
+        $('input[name="pubHouse"]').val(data.publisher);
+      }
+    }, 'json');
+  }

@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+    title Index Page
+    link(rel='stylesheet', type='text/css', href='bootstrap/css/bootstrap.min.css', media='screen')
+    link(rel='stylesheet', type='text/css', href='css/common.css')
+    script(type='text/javascript', src='js/jquery-1.12.0.js')
+    script(type='text/javascript', src='bootstrap/js/bootstrap.min.js')
+  body
+    .container
+      #pageone.row.header
+        .col-xs-2
+          .btn-group
+            span.glyphicon.glyphicon-menu-hamburger(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            ul.dropdown-menu
+              li
+                a(href='index.php') 首页
+              li
+                a(href='setting.php') 设置
+        .col-xs-8
+          h4 所有书籍
+        .col-xs-2
+          a.glyphicon.glyphicon-plus(href='newbook', aria-hidden='true')
+      .row
+        .col-xs-12
+          .list-group
+            -books.forEach(function(book) {
+              a(class="list-group-item" href="book_update.php?bid="+book.bid)
+                = book.b_name+' - '+book.aname
+            -})

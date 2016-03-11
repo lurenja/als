@@ -1,0 +1,28 @@
+{
+  "name": "als",
+  "version": "0.0.1",
+  "description": "System from php to node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lurenja/als.git"
+  },
+  "keywords": [
+    "als"
+  ],
+  "author": "abe shi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lurenja/als/issues"
+  },
+  "homepage": "https://github.com/lurenja/als#readme",
+  "dependencies": {
+    "formidable": "^1.0.17",
+    "jade": "^1.11.0",
+    "mysql": "^2.10.2"
+  }
+}
