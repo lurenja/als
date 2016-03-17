@@ -1,0 +1,49 @@
+extends book_form
+block title
+  title 书籍信息
+block actions
+  a.glyphicon.glyphicon-trash.ui-btn-del(data-toggle='modal', data-target='#delDialog')
+  #delDialog.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+    .modal-content(role='main', style='text-align:center;')
+      .modal-body
+        p.ui-title(style='') 确认删除书籍？
+        p(style='font-size: .6em;color: #c11b17;') 删除后数据无法恢复
+      .modal-footer
+        a.btn.btn-danger(href='#', onclick='delBook()') 删除
+        a.btn.btn-default(href='#', data-dismiss='modal') 取消
+if books.length == 1
+  block header
+    h4 #{books[0].b_name}
+  block bid_input
+    input.form-control(type='text', name='bid', value='#{books[0].bid}')
+  block bname_input
+    input.form-control(type='text', name='bName', value='#{books[0].b_name}')
+  block author_input
+    input.form-control(type='text', name='author', value='#{books[0].aname}')
+  block pdate_input
+    input.form-control(type='text', name='pubDate', value='#{books[0].pub_date}')
+  block phouse_input
+    input.form-control(type='text', name='pubHouse', id='pub_h_input', autocomplete='off', value='#{books[0].pub_house}')
+  block type_input
+    .dropdown
+      button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='false', aria-expanded='false') #{books[0].tname}
+      ul#type_list.dropdown-menu
+    input(type='hidden', name='type', value='#{books[0].type_id}')
+  block serial_input
+    input.form-control(type='number', pattern='[0-9]', name='serialNo', value='#{books[0].serial_no}')
+  block remark_input
+    input.form-control(type='text', name='remarks', value='#{books[0].remarks}')
+block append scripts
+  script(type='text/javascript').
+    $(function(){
+      $('#submitBtn').on('click', function(event){
+        event.preventDefault();
+        updateBook();
+      });
+    });
+    function updateBook(){
+      $('#book_form').attr('action', 'updateBook').submit();
+    }
+    function delBook(){
+      $('#book_form').attr('action', 'deleteBook').submit();
+    }

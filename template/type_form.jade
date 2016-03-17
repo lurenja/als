@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+    block title
+    link(rel='stylesheet', type='text/css', href='bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='css/common.css')
+    script(type='text/javascript', src='js/jquery-1.12.0.js')
+    script(type='text/javascript', src='bootstrap/js/bootstrap.min.js')
+  body
+    .container
+      .row.header
+        .col-xs-2
+          a.glyphicon.glyphicon-menu-left(href='setting')
+        .col-xs-8
+          block header_text
+        .col-xs-2
+          block actions
+      form#booktype_form.form-horizontal(method='post')
+        .form-group
+          label.col-xs-3.control-label(for='id_input') 编号
+          .col-xs-9
+            block id_input
+              input#id_input.form-control(type='text', name='id')
+        .form-group
+          label.col-xs-3.control-label(for='name_input') 名称
+          .col-xs-9
+            block name_input
+              input#name_input.form-control(type='text', name='name')
+        button.btn.btn-default.col-xs-12(onclick='submit()') 保存
+    block init_scripts
+      script(type='text/javascript').
+        $(function() {
+          //阻止表单按钮默认事件
+          $('#booktype_form button').on('click', function(event){
+            event.preventDefault();
+          });
+        });
+        //提交表单
+        function submit(){
+          $('#booktype_form').submit();
+        }

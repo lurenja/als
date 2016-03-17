@@ -1,0 +1,54 @@
+doctype html
+html
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+    title 参数设置
+    link(rel='stylesheet', type='text/css', href='bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='css/common.css')
+    style(type='text/css').
+      table.table td{
+      cursor: pointer;
+      }
+      .panel-icon {
+      float:right;
+      }
+    script(type='text/javascript', src='js/jquery-1.12.0.js')
+    script(type='text/javascript', src='bootstrap/js/bootstrap.min.js')
+    script(type='text/javascript').
+      //新增书籍类型
+      function newType(){
+        window.location.href = 'newType';
+      }
+      //更新书籍类型
+      function updateType(trObj){
+        var $tds = $(trObj).find('td');
+        window.location.href = 'selType?id='+ $tds.eq(0).text()+'&name='+$tds.eq(1).text();
+      }
+  body
+    .container
+      .row.header
+        .col-xs-2
+          a.glyphicon.glyphicon-home(href='index')
+        .col-xs-8
+          h5 参数设置
+      div(data-role='row')
+        .col-xs-12
+          .panel.panel-default
+            .panel-heading
+              | 书籍类型
+              a.glyphicon.glyphicon-plus.panel-icon(href='javascript:void(0);', onclick='newType()')
+            .panel-body
+              table.table.table-hover
+                thead
+                  tr
+                    th 编号
+                    th 名称
+                tbody
+                  -types.forEach(function(row){
+                    tr(onclick="updateType(this)")
+                      td
+                        = row.id
+                      td
+                        = row.name
+                  -})

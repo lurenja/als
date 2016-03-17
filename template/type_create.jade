@@ -1,0 +1,10 @@
+extends type_form
+block title
+  title 新类型
+block header_text
+  h4 新类型
+block append init_scripts
+  script(type='text/javascript').
+    $(function() {
+      $('#booktype_form').attr('action', 'createType');
+    });

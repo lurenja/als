@@ -16,9 +16,9 @@ html
             span.glyphicon.glyphicon-menu-hamburger(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
             ul.dropdown-menu
               li
-                a(href='index.php') 首页
+                a(href='index') 首页
               li
-                a(href='setting.php') 设置
+                a(href='setting') 设置
         .col-xs-8
           h4 所有书籍
         .col-xs-2
@@ -27,6 +27,6 @@ html
         .col-xs-12
           .list-group
             -books.forEach(function(book) {
-              a(class="list-group-item" href="book_update.php?bid="+book.bid)
+              a(class="list-group-item" href="selbook?bid="+book.bid)
                 = book.b_name+' - '+book.aname
             -})

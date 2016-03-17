@@ -1,19 +1,31 @@
 var server = require("./server");
 var router = require('./router');
-var bookHdl = require('./bookHandlers');
-var basicHdl = require('./basicHandlers');
-var util = require('./common');
+var bookHand = require('./bookHandlers');
+var beHand = require('./backendHandlers');
+var setHand = require('./setHandlers');
+var util = require('./util');
 
 var handle = {};
-handle["/"]= bookHdl.index;
-handle["/index"]= bookHdl.index;
-// handle["/upload"]= requestHandlers.upload;
-// handle["/show"]= requestHandlers.show;
-handle['/newbook'] = bookHdl.newBookP;
-handle['/createBook'] = bookHdl.createBook;
-handle['/loadType'] = basicHdl.bookType;
-handle['/loadPubHouse'] = basicHdl.pubHouse;
-handle['/loadAuthor'] = basicHdl.getAuthor;
+handle["/"]= bookHand.index;
+handle["/index"]= bookHand.index;
+
+handle['/newbook'] = bookHand.newBook;
+handle['/selbook'] = bookHand.selBook;
+handle['/createBook'] = bookHand.createBook;
+handle['/updateBook'] = bookHand.updateBook;
+handle['/deleteBook'] = bookHand.deleteBook;
+
+handle['/setting'] = setHand.setting;
+handle['/newType'] = setHand.newType;
+handle['/createType'] = setHand.createType;
+handle['/selType'] = setHand.selType;
+handle['/updateType'] = setHand.updateType;
+handle['/deleteType'] = setHand.deleteType;
+
+handle['/loadType'] = beHand.getBookType;
+handle['/loadPubHouse'] = beHand.getPubHouse;
+handle['/loadAuthor'] = beHand.getAuthor;
+
 handle['load'] = util.loadFile;
 
 server.start(router.route, handle);

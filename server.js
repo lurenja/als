@@ -7,14 +7,14 @@ function start(route, handle) {
 	function onRequest(request, response) {
 		var pathname = url.parse(request.url).pathname;
 		if(!_pool){
-			console.log('db pool initialize');
+			console.log('DB Pool created...');
 			_pool = initDBPool();
 		}
-		console.log("Request for "+ pathname +" received.");
+		// console.log("Request "+ pathname +" received.");
 		route(handle, pathname, response, request, _pool);
 	}
 	http.createServer(onRequest).listen(90);
-	console.log('server started');
+	console.log('Server running...');
 }
 
 function initDBPool() {
