@@ -7,7 +7,7 @@ var qs = require('querystring');
 function setting(response, request, pool) {
 	beHandler.loadBookType(pool, function(data) {
 		var template = fs.readFileSync('./template/setting.jade');
-		var fn = jade.compile(template);
+		var fn = jade.compile(template, {filename: './template/layout.jade', pretty: true});
 		var context = {types: data};
 		response.writeHead(200,{"Content-Type":"text/html"});
 		response.write(fn(context));

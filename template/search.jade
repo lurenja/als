@@ -1,0 +1,38 @@
+extends layout
+block title
+  title 搜索书籍
+block append scripts
+  script(type="text/javascript").
+    function newBook(trObj){
+      var $tds = $(trObj).find('td');
+      var url = 'newBookByParam?isbn='+$tds.eq(0).text()+'&name='
+        +$tds.eq(1).text()+'&author='+$tds.eq(2).text()+'&pubdate='+$tds.eq(3).text()
+        +'&publisher='+$tds.eq(4).text();
+      window.location.href = url;
+    }
+block header_text
+  h4 豆瓣搜索
+block content
+  .row
+    .form-group
+      .col-xs-10
+        input.form-control(type='search', name='key')
+      .col-xs-2
+        a.glyphicon.glyphicon-search(href='javascript:void(0);', onclick='getISBN()', style='margin-top: 10px;', title='Search')
+  .row
+    .col-xs-12
+      table.table.table-hover
+        thead
+          tr
+            th ISBN
+            th 名称
+            th 作者
+            th 出版时间
+            th 出版社
+        tbody
+          tr(onclick="newBook(this)")
+            td 测试1
+            td 测试2
+            td 测试3
+            td 测试4
+            td 测试5

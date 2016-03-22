@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+    block title
+    block style
+      link(rel='stylesheet', type='text/css', href='bootstrap/css/bootstrap.min.css', media='screen')
+      link(rel='stylesheet', type='text/css', href='css/common.css')
+    block scripts
+      script(type='text/javascript', src='js/jquery-1.12.0.js')
+      script(type='text/javascript', src='bootstrap/js/bootstrap.min.js')
+  body
+    .container
+      .row.header
+        .col-xs-2
+          block pre_action
+            .btn-group
+              span.glyphicon.glyphicon-menu-hamburger(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+              ul.dropdown-menu
+                li
+                  a(href='index') 列表
+                li
+                  a(href='search') 搜索
+                li
+                  a(href='setting') 设置
+        .col-xs-8
+          block header_text
+        .col-xs-2
+          block after_action
+      block content

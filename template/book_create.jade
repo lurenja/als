@@ -1,6 +1,33 @@
 extends book_form
 block title
   title 新书
+block header
+  h4 新书入库
+block bid_input
+  if isbn != undefined
+    input.form-control(type='text', name='bid', value='#{isbn}')
+  else
+    input.form-control(type='text', name='bid', value='')
+block bname_input
+  if name != undefined
+    input.form-control(type='text', name='bName', value='#{name}')
+  else
+    input.form-control(type='text', name='bName', value='')
+block author_input
+  if author != undefined
+    input.form-control(type='text', name='author', value='#{author}')
+  else
+    input.form-control(type='text', name='author', value='')
+block pdate_input
+  if pubdate != undefined
+    input.form-control(type='text', name='pubDate', value='#{pubdate}')
+  else
+    input.form-control(type='text', name='pubDate', value='')
+block phouse_input
+  if publisher != undefined
+    input.form-control(type='text', name='pubHouse', id='pub_h_input', autocomplete='off', value='#{publisher}')
+  else
+    input.form-control(type='text', name='pubHouse', id='pub_h_input', autocomplete='off', value='')
 block append scripts
   script(type='text/javascript').
     $(function(){

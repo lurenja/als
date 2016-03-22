@@ -5,7 +5,7 @@ var qs = require('querystring');
 var fs = require('fs');
 var util = require('./util');
 
-function index(response, request, pool){
+function bookList(response, request, pool){
 	var sql = 'select t.bid, t.b_name, t.author as aname '+
 				'from tbl_book t '+
 			   'order by t.bid desc';
@@ -15,7 +15,7 @@ function index(response, request, pool){
 			function(err, rows) {
 				if(err) util.returnError(response, 500, err);
 				var template = fs.readFileSync('./template/index.jade');
-				var fn = jade.compile(template);
+				var fn = jade.compile(template, {filename: './template/layout.jade', pretty: true});
 				var context = {books: rows};
 				response.writeHead(200,{"Content-Type":"text/html"});
 				response.write(fn(context));
@@ -32,6 +32,17 @@ function newBook(response, request) {
 	response.writeHead(200,{"Content-Type":"text/html"});
 	response.write(fn());
 	response.end();
+}
+
+function newBookByParam(response, request) {
+    var param = url.parse(request.url, true).query;
+    var context = {isbn: param.isbn, name:param.name, author:param.author, pubdate:param.pubdate, publisher:param.publisher};
+    var template = fs.readFileSync('./template/book_create.jade');
+    // var fn = jade.compile(template, {filename: './template/book_form.jade'});
+    var html = jade.renderFile(template, {filename: './template/book_form.jade'});
+    response.writeHead(200,{"Content-Type":"text/html"});
+    response.write(html);
+    response.end();
 }
 
 function createBook(response, request, pool) {
@@ -126,9 +137,19 @@ function deleteBook(response, request, pool) {
 		});
 	});
 }
-exports.index = index;
+
+function bookSearch(response, request) {
+    var template = fs.readFileSync('./template/search.jade');
+    var fn = jade.compile(template, {filename: './template/layout.jade', pretty: true});
+    response.writeHead(200,{"Content-Type":"text/html"});
+    response.write(fn());
+    response.end();
+}
+exports.bookList = bookList;
 exports.newBook = newBook;
+exports.newBookByParam = newBookByParam;
 exports.createBook = createBook;
 exports.selBook = selBook;
 exports.updateBook = updateBook;
 exports.deleteBook = deleteBook;
+exports.search = bookSearch;

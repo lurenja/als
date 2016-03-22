@@ -32,3 +32,10 @@ a:hover {
 	min-width: 100px;
 	overflow: auto;
 }
+@media (max-width:768px) {
+	.form-horizontal .control-label {
+		padding-top: 7px;
+		margin-bottom: 0;
+		text-align: right;
+	}
+}

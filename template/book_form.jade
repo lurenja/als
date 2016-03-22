@@ -48,10 +48,10 @@ html
     form#book_form.form-horizontal(method='post')
       input#oper(type='hidden', name='oper', value='')
       .form-group
-        label.col-xs-3.control-label ISBN
+        label.col-xs-3.control-label(for='bid') ISBN
         .col-xs-6
           block bid_input
-            input.form-control(type='text', name='bid', value='')
+            input.form-control(type='text', name='bid', id='bid', value='')
         .col-xs-3
           a.glyphicon.glyphicon-search(href='javascript:void(0);', onclick='getISBN()', style='margin-top: 10px;', title='Get Info')
       .form-group
