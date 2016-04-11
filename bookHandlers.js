@@ -38,10 +38,9 @@ function newBookByParam(response, request) {
     var param = url.parse(request.url, true).query;
     var context = {isbn: param.isbn, name:param.name, author:param.author, pubdate:param.pubdate, publisher:param.publisher};
     var template = fs.readFileSync('./template/book_create.jade');
-    // var fn = jade.compile(template, {filename: './template/book_form.jade'});
-    var html = jade.renderFile(template, {filename: './template/book_form.jade'});
+    var fn = jade.compile(template, {filename: './template/book_form.jade'});
     response.writeHead(200,{"Content-Type":"text/html"});
-    response.write(html);
+    response.write(fn(context));
     response.end();
 }
 
@@ -61,7 +60,7 @@ function createBook(response, request, pool) {
 				[param.bid, param.bName, param.author, param.pubDate+'-01', param.pubHouse, param.remarks, param.type, param.serialNo],
 				function(err, rows) {
 					if(err) util.returnError(response, 500, err);
-					index(response, request, pool);
+					bookList(response, request, pool);
 				}
 			);
 			conn.release();
@@ -111,7 +110,7 @@ function updateBook(response, request, pool){
         		[param.bName, param.author, param.pubDate+'-01', param.pubHouse, param.type, param.serialNo, param.remarks, param.bid],
 				function(err, rows) {
 					if(err) util.returnError(response, 500, err);
-					index(response, request, pool);
+					bookList(response, request, pool);
 				}
 			);
 			conn.release();
@@ -131,7 +130,7 @@ function deleteBook(response, request, pool) {
 			var param = qs.parse(postData);
 			conn.query(sql, [param.bid], function(err, rows) {
 				if(err) util.returnError(response, 500, err);
-				index(response, request, pool);
+				bookList(response, request, pool);
 			});
 			conn.release();
 		});

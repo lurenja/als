@@ -10,18 +10,41 @@ block append scripts
         +'&publisher='+$tds.eq(4).text();
       window.location.href = url;
     }
+    function getISBN() {
+      var searchAPI = 'https://api.douban.com/v2/book/search?q='+$('#key').val();
+      $.get(searchAPI, {}, function(data){
+        var books = data.books;
+        var table = $('#book_tb').find('tbody');
+        $(books).each(function(){
+          var $tr = $('<tr>');
+          $tr.on('click', function(){
+            newBook(this)
+          });
+          var trCode = '<td>';
+          if(this['isbn13'] == undefined){
+            trCode += this['isbn10'];
+          }else{
+            trCode += this['isbn13'];
+          }
+          trCode += '</td><td>'+this['title']+'</td><td>'
+            +this['author']+'</td><td>'+this['pubdate']+'</td><td>'+this['publisher']+'</td>';
+          $tr.append(trCode);
+          table.append($tr);
+        });
+      }, 'jsonp')
+    }
 block header_text
   h4 豆瓣搜索
 block content
   .row
     .form-group
       .col-xs-10
-        input.form-control(type='search', name='key')
+        input.form-control(type='search', name='key', id='key')
       .col-xs-2
         a.glyphicon.glyphicon-search(href='javascript:void(0);', onclick='getISBN()', style='margin-top: 10px;', title='Search')
   .row
     .col-xs-12
-      table.table.table-hover
+      table.table.table-hover#book_tb
         thead
           tr
             th ISBN
