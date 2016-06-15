@@ -1,5 +1,5 @@
 var fs = require('fs');
-
+/* Load static file */
 function loadFile(response, pathname) {
 	var ext = pathname.match(/(\.[^.]+|)$/)[0];//取得后缀名
 	switch(ext){
@@ -31,12 +31,11 @@ function loadFile(response, pathname) {
 		returnError(response, pathname);
 	}
 }
-
+/* Render error page */
 function returnError(response, code, error){
 	response.writeHead(code,{"Content-Type":"text/plain"});
 	response.write(error+'\n');
 	response.end();
 }
-
 exports.loadFile = loadFile;
 exports.returnError = returnError;

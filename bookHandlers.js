@@ -1,10 +1,9 @@
-
 var jade = require('jade');
 var url = require('url');
 var qs = require('querystring');
 var fs = require('fs');
 var util = require('./util');
-
+/* Query book list from database and render book list page */
 function bookList(response, request, pool){
 	var sql = 'select t.bid, t.b_name, t.author as aname '+
 				'from tbl_book t '+
@@ -25,7 +24,7 @@ function bookList(response, request, pool){
 		conn.release();
 	});
 }
-
+/* Render new book page */
 function newBook(response, request) {
 	var template = fs.readFileSync('./template/book_create.jade');
 	var fn = jade.compile(template, {filename: './template/book_form.jade'});
@@ -33,7 +32,7 @@ function newBook(response, request) {
 	response.write(fn());
 	response.end();
 }
-
+/* Render new book page with parameters */
 function newBookByParam(response, request) {
     var param = url.parse(request.url, true).query;
     var context = {isbn: param.isbn, name:param.name, author:param.author, pubdate:param.pubdate, publisher:param.publisher};
@@ -43,7 +42,7 @@ function newBookByParam(response, request) {
     response.write(fn(context));
     response.end();
 }
-
+/* Insert new book to database and return to book list page */
 function createBook(response, request, pool) {
 	var sql = 'insert into tbl_book(bid, b_name, author, pub_date, pub_house, remarks, type, serial_no) '+
 	          'values (?, ?, ?, ?, ?, ?, ?, ?)';
@@ -67,6 +66,7 @@ function createBook(response, request, pool) {
 		});
     });
 }
+/* Query single book and render update book page */
 function selBook(response, request, pool){
 	var sql = 'select t.bid, t.b_name, t.author as aname, '+
                      'date_format(t.pub_date,\'%Y-%m\') as pub_date, '+
@@ -92,7 +92,7 @@ function selBook(response, request, pool){
 		conn.release();
 	});
 }
-
+/* Update single book and render book list page */
 function updateBook(response, request, pool){
 	var sql = 'update tbl_book t '+
 	             'set t.b_name = ?, t.author = ?, t.pub_date = ?,' +
@@ -117,7 +117,7 @@ function updateBook(response, request, pool){
         });
     });
 }
-
+/* Delete book from database and render book list page */
 function deleteBook(response, request, pool) {
 	var sql = 'delete from tbl_book where bid = ?';
 	var postData = '';
@@ -136,7 +136,7 @@ function deleteBook(response, request, pool) {
 		});
 	});
 }
-
+/* Render search book page */
 function bookSearch(response, request) {
     var template = fs.readFileSync('./template/search.jade');
     var fn = jade.compile(template, {filename: './template/layout.jade', pretty: true});

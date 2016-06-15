@@ -2,7 +2,7 @@ var jade = require('jade');
 var url = require('url');
 var fs = require('fs');
 var util = require('./util')
-
+/* Load book types and return to page */
 function getBookType(response, request, pool) {
 	loadBookType(pool, function(data){
 		response.writeHead(200,{"Content-Type":"application/json"});
@@ -10,7 +10,7 @@ function getBookType(response, request, pool) {
 		response.end();
 	});
 }
-
+/* Query book types from database */
 function loadBookType(pool, callback){
 	var sql = 'select t.t_no as id, t.description as name FROM tbl_book_type t where t.t_no is not null order by t.t_no';
 	pool.getConnection(function(err, conn) {
@@ -22,6 +22,7 @@ function loadBookType(pool, callback){
 		conn.release();
 	});
 }
+/* Query publisher house list from database */
 function getPubHouse(response, request, pool) {
 	var sql = 'select distinct t.pub_house as name from tbl_book t where upper(t.pub_house) like upper(?) order by 1';
 	pool.getConnection(function(err, conn) {
@@ -37,6 +38,7 @@ function getPubHouse(response, request, pool) {
 		conn.release();
 	});
 }
+/* Query author list from database */
 function getAuthor(response, request, pool) {
 	var sql = 'select distinct t.author as author from tbl_book t where upper(t.author) like upper(?) order by 1';
 	pool.getConnection(function(err, conn) {

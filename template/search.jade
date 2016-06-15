@@ -3,6 +3,7 @@ block title
   title 搜索书籍
 block append scripts
   script(type="text/javascript").
+    /* Redirect to new book page with parameters */
     function newBook(trObj){
       var $tds = $(trObj).find('td');
       var url = 'newBookByParam?isbn='+$tds.eq(0).text()+'&name='
@@ -10,6 +11,7 @@ block append scripts
         +'&publisher='+$tds.eq(4).text();
       window.location.href = url;
     }
+    /* Search Book with Douban API */
     function getISBN() {
       var searchAPI = 'https://api.douban.com/v2/book/search?q='+$('#key').val();
       $.get(searchAPI, {}, function(data){
@@ -29,7 +31,7 @@ block append scripts
           trCode += '</td><td>'+this['title']+'</td><td>'
             +this['author']+'</td><td>'+this['pubdate']+'</td><td>'+this['publisher']+'</td>';
           $tr.append(trCode);
-          table.append($tr);
+          table.html($tr);
         });
       }, 'jsonp')
     }
@@ -53,9 +55,3 @@ block content
             th 出版时间
             th 出版社
         tbody
-          tr(onclick="newBook(this)")
-            td 测试1
-            td 测试2
-            td 测试3
-            td 测试4
-            td 测试5

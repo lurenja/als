@@ -11,7 +11,7 @@ block append style
     }
 block append scripts
   script(type='text/javascript').
-    //更新书籍类型
+    /* 更新书籍类型 */
     function updateType(trObj){
       var $tds = $(trObj).find('td');
       window.location.href = 'selType?id='+ $tds.eq(0).text()+'&name='+$tds.eq(1).text();

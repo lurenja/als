@@ -41,9 +41,11 @@ block append scripts
         updateBook();
       });
     });
+    /* Update book */
     function updateBook(){
       $('#book_form').attr('action', 'updateBook').submit();
     }
+    /* Delete book */
     function delBook(){
       $('#book_form').attr('action', 'deleteBook').submit();
     }

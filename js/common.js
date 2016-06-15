@@ -1,4 +1,4 @@
-//初始化下拉框
+/* 初始化日期下拉框 */
 function initSelect(){
 	var myDate = new Date();
 	var year = myDate.getFullYear();

@@ -1,16 +1,18 @@
-function setButton(e){ //设置下拉按钮文字
+/* 设置下拉按钮文字 */
+function setButton(e){
   $a = $(e);
   var $button = $a.closest('ul').prev('button');
   $button.text($a.text());
   return;
 }
-function setType(e, typeId){ //选择类别触发方法
+/* 选择类别触发方法 */
+function setType(e, typeId){
   setButton(e);
   $('input[name="type"]').val(typeId);
 }
+/* Search book by ISBN using Douban API */
 function getISBN(){
   var isbn = $('input[name="bid"]').val();
-  var url = 'http://api.36wu.com/ISBN/GetIsbnInfo?authkey=8510a6b198f0494295cefff5be5305f1&format=json&isbn='+isbn;
   var doubanApi = 'https://api.douban.com/v2/book/isbn/:'+isbn;
   $.get(doubanApi, {}, function(result){
     if(result){

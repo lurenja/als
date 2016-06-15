@@ -3,7 +3,7 @@ var fs = require('fs');
 var jade = require('jade');
 var url = require('url');
 var qs = require('querystring');
-
+/* Render setting page */
 function setting(response, request, pool) {
 	beHandler.loadBookType(pool, function(data) {
 		var template = fs.readFileSync('./template/setting.jade');
@@ -14,7 +14,7 @@ function setting(response, request, pool) {
 		response.end();
 	});
 }
-
+/* Render new book type page */
 function newType(response, request) {
 	var template = fs.readFileSync('./template/type_create.jade');
 	var fn = jade.compile(template, {filename: './template/type_form.jade'});
@@ -22,7 +22,7 @@ function newType(response, request) {
 	response.write(fn());
 	response.end();
 }
-
+/* Insert new book type to database and render setting page */
 function createType(response, request, pool){
 	var sql = 'insert into tbl_book_type (t_no, description) values (?, ?)';
 	var postData = '';
@@ -45,7 +45,7 @@ function createType(response, request, pool){
 		});
     });
 }
-
+/* Render update book type page */
 function selType(response, request) {
 	var param = url.parse(request.url, true).query;
 	console.log('request param: ' + param.id);
@@ -57,7 +57,7 @@ function selType(response, request) {
 	response.write(fn(context));
 	response.end();
 }
-
+/* Update book type and render setting page */
 function updateType(response, request, pool) {
 	var sql = 'update tbl_book_type t set t.description = ? where t.t_no = ?';
 	var postData = '';
@@ -80,7 +80,7 @@ function updateType(response, request, pool) {
 		});
     });
 }
-
+/* Delete book type from database and render setting page */
 function deleteType(response, request, pool) {
 	var sql = 'delete from tbl_book_type where t_no = ?';
 	var postData = '';

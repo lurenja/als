@@ -32,12 +32,12 @@ html
     block init_scripts
       script(type='text/javascript').
         $(function() {
-          //阻止表单按钮默认事件
+          /* 阻止表单按钮默认事件 */
           $('#booktype_form button').on('click', function(event){
             event.preventDefault();
           });
         });
-        //提交表单
+        /* 提交表单 */
         function submit(){
           $('#booktype_form').submit();
         }
