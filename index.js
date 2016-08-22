@@ -29,5 +29,5 @@ handle['/loadPubHouse'] = beHand.getPubHouse;
 handle['/loadAuthor'] = beHand.getAuthor;
 
 handle['load'] = util.loadFile;
-
+console.log('this is the index');
 server.start(router.route, handle);
