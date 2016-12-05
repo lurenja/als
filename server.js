@@ -11,7 +11,7 @@ function start(route, handle) {
 		if(!_pool){
 			_pool = initDBPool();
 		}
-		// console.log("Request "+ pathname +" received.");
+		console.log("Request "+ pathname +" received.");
 		route(handle, pathname, response, request, _pool);
 	}
 	http.createServer(onRequest).listen(server_port, server_ip);

@@ -10,7 +10,7 @@ handle["/"]= bookHand.bookList;
 handle["/index"]= bookHand.bookList;
 
 handle['/newBook'] = bookHand.newBook;
-handle['/newBookByParam'] = bookHand.newBookByParam
+handle['/newBookByParam'] = bookHand.newBookByParam;
 handle['/selbook'] = bookHand.selBook;
 handle['/createBook'] = bookHand.createBook;
 handle['/updateBook'] = bookHand.updateBook;
@@ -29,5 +29,5 @@ handle['/loadPubHouse'] = beHand.getPubHouse;
 handle['/loadAuthor'] = beHand.getAuthor;
 
 handle['load'] = util.loadFile;
-console.log('this is the index');
+
 server.start(router.route, handle);
