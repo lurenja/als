@@ -9,24 +9,26 @@ html
       link(rel='stylesheet', type='text/css', href='css/common.css')
       //- link(rel='stylesheet', type='text/css', href='css/index.css')
     block scripts
+      //- jquery 1.12 and bootstrap 3.3.5
       script(type='text/javascript', src='js/jquery-1.12.0.js')
       script(type='text/javascript', src='bootstrap/js/bootstrap.min.js')
+      script(src='js/common.js')
   body
     .container
-      .row
-        .col-xs-12
-          ul#nav_menu.list-group
-            li.list-group-item
-              a(href='index') 列表
-            li.list-group-item
-              a(href='search') 搜索
-            li.list-group-item
-              a(href='setting') 设置
-      .row.header
+      //- .row
+      //-   .col-xs-12
+      //-     ul#nav_menu.list-group
+      //-       li.list-group-item
+      //-         a(href='index') 列表
+      //-       li.list-group-item
+      //-         a(href='search') 搜索
+      //-       li.list-group-item
+      //-         a(href='setting') 设置
+      .row.header.page-header
         .col-xs-2
           block pre_action
-            .btn-group
-              span.glyphicon.glyphicon-menu-hamburger(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            //- .btn-group
+            //-   span.glyphicon.glyphicon-menu-hamburger(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
         .col-xs-8
           block header_text
         .col-xs-2

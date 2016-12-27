@@ -13,7 +13,7 @@ function bookList(response, request, pool){
 		conn.query(sql, [],
 			function(err, rows) {
 				if(err) util.returnError(response, 500, err);
-				var template = fs.readFileSync('./template/index.jade');
+				var template = fs.readFileSync('./template/book_list.jade');
 				var fn = jade.compile(template, {filename: './template/layout.jade', pretty: true});
 				var context = {books: rows};
 				response.writeHead(200,{"Content-Type":"text/html"});

@@ -1,15 +1,25 @@
 extends layout
 block title
-  title Abe's Libraray System
+  title Alib System
+block append style
+  style.
+    button {
+      margin: 20px auto;
+    }
+    .btn-lg {
+      padding: 2em 3em;
+    }
 block header_text
-  h4 书籍列表
-block after_action
-  a.glyphicon.glyphicon-plus(href='newBook', aria-hidden='true')
+  h3 A library System
 block content
   .row
-    .col-xs-12
-      .list-group
-        -books.forEach(function(book) {
-          a(class="list-group-item" href="selbook?bid="+book.bid)
-            = book.b_name+' - '+book.aname
-        -})
+    .col-xs-6.col-md-3
+      button.btn.btn-default.btn-lg.btn-block(onclick="toUrl('newBook')") 手动录入
+    .col-xs-6.col-md-3
+      button.btn.btn-default.btn-lg.btn-block(onclick="toUrl('search')") 豆瓣搜索
+    .col-xs-6.col-md-3
+      button.btn.btn-default.btn-lg.btn-block(onclick="toUrl('bookList')") 藏书管理
+    .col-xs-6.col-md-3
+      button.btn.btn-default.btn-lg.btn-block 藏书统计
+    .col-xs-6.col-md-3
+      button.btn.btn-default.btn-lg.btn-block(onclick="toUrl('setting')") 设置

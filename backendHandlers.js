@@ -2,6 +2,14 @@ var jade = require('jade');
 var url = require('url');
 var fs = require('fs');
 var util = require('./util')
+// Load Index Page
+function index(response, request, pool){
+	var template = fs.readFileSync('./template/index.jade');
+	var fn = jade.compile(template, {filename: './template/layout.jade', pretty: true});
+	response.writeHead(200,{"Content-Type":"text/html"});
+	response.write(fn());
+	response.end();
+}
 /* Load book types and return to page */
 function getBookType(response, request, pool) {
 	loadBookType(pool, function(data){
@@ -54,6 +62,7 @@ function getAuthor(response, request, pool) {
 		conn.release();
 	});
 }
+exports.index = index;
 exports.getBookType = getBookType;
 exports.loadBookType = loadBookType;
 exports.getPubHouse = getPubHouse;

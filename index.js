@@ -6,8 +6,8 @@ var setHand = require('./setHandlers');
 var util = require('./util');
 
 var handle = {};
-handle["/"]= bookHand.bookList;
-handle["/index"]= bookHand.bookList;
+handle["/"]= beHand.index;
+handle["/index"]= beHand.index;
 
 handle['/newBook'] = bookHand.newBook;
 handle['/newBookByParam'] = bookHand.newBookByParam;
@@ -16,6 +16,7 @@ handle['/createBook'] = bookHand.createBook;
 handle['/updateBook'] = bookHand.updateBook;
 handle['/deleteBook'] = bookHand.deleteBook;
 handle['/search'] = bookHand.search;
+handle['/bookList'] = bookHand.bookList;
 
 handle['/setting'] = setHand.setting;
 handle['/newType'] = setHand.newType;

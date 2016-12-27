@@ -37,7 +37,7 @@ html
         });
   body
     .container
-      .row.header
+      .row.header.page-header
         .col-xs-2
           a.glyphicon.glyphicon-menu-left(href='index')
         .col-xs-8
@@ -45,58 +45,58 @@ html
           block header
         .col-xs-2
           block actions
-    form#book_form.form-horizontal(method='post')
-      input#oper(type='hidden', name='oper', value='')
-      .form-group
-        label.col-xs-3.control-label(for='bid') ISBN
-        .col-xs-6
-          block bid_input
-            input.form-control(type='text', name='bid', id='bid', value='')
-        .col-xs-3
-          a.glyphicon.glyphicon-search(href='javascript:void(0);', onclick='getISBN()', style='margin-top: 10px;', title='Get Info')
-      .form-group
-        label.col-xs-3.control-label 书名
-        .col-xs-9
-          block bname_input
-            input.form-control(type='text', name='bName', value='')
-      .form-group
-        label.col-xs-3.control-label 作者
-        .col-xs-9
-          block author_input
-            input.form-control(type='text', name='author', id='author_input', autocomplete='off', value='')
-        //- #author_div.col-xs-3
-        //-   a.glyphicon.glyphicon-plus(href='javascript:void(0);', onclick='newAuthor()', style='margin-top: 10px;', title='New Author')
-      .form-group
-        label.col-xs-3.control-label 出版日期
-        .col-xs-9
-          block pdate_input
-            input.form-control(type='month', name='pubDate', value='')
-      .form-group
-        label.col-xs-3.control-label 出版社
-        .col-xs-9
-          block phouse_input
-            input.form-control(type='text', name='pubHouse', id='pub_h_input', autocomplete='off', value='')
-      .form-group
-        label.col-xs-3.control-label 类型
-        .col-xs-9
-          block type_input
-            .dropdown
-              button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='false', aria-expanded='false') 类型
-              ul#type_list.dropdown-menu
-                //- li
-                //-   a(href='#', onclick="setType(this, \''. $row['id'] .'\')"): 类型
-            input(type='hidden', name='type', value='')
-      .form-group
-        label.col-xs-3.control-label 册数
-        .col-xs-9
-          block serial_input
-            input.form-control(type='number', pattern='[0-9]', name='serialNo', value='')
-      .form-group
-        label.col-xs-3.control-label 备注
-        .col-xs-9
-          block remark_input
-            input.form-control(type='text', name='remarks', value='')
-      button#submitBtn.btn.btn-default.form-control 保存
+      form#book_form.form-horizontal(method='post')
+        input#oper(type='hidden', name='oper', value='')
+        .form-group
+          label.col-xs-3.control-label(for='bid') ISBN
+          .col-xs-6
+            block bid_input
+              input.form-control(type='text', name='bid', id='bid', value='')
+          .col-xs-3
+            a.glyphicon.glyphicon-search(href='javascript:void(0);', onclick='getISBN()', style='margin-top: 10px;', title='Get Info')
+        .form-group
+          label.col-xs-3.control-label 书名
+          .col-xs-9
+            block bname_input
+              input.form-control(type='text', name='bName', value='')
+        .form-group
+          label.col-xs-3.control-label 作者
+          .col-xs-9
+            block author_input
+              input.form-control(type='text', name='author', id='author_input', autocomplete='off', value='')
+          //- #author_div.col-xs-3
+          //-   a.glyphicon.glyphicon-plus(href='javascript:void(0);', onclick='newAuthor()', style='margin-top: 10px;', title='New Author')
+        .form-group
+          label.col-xs-3.control-label 出版日期
+          .col-xs-9
+            block pdate_input
+              input.form-control(type='month', name='pubDate', value='')
+        .form-group
+          label.col-xs-3.control-label 出版社
+          .col-xs-9
+            block phouse_input
+              input.form-control(type='text', name='pubHouse', id='pub_h_input', autocomplete='off', value='')
+        .form-group
+          label.col-xs-3.control-label 类型
+          .col-xs-9
+            block type_input
+              .dropdown
+                button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='false', aria-expanded='false') 类型
+                ul#type_list.dropdown-menu
+                  //- li
+                  //-   a(href='#', onclick="setType(this, \''. $row['id'] .'\')"): 类型
+              input(type='hidden', name='type', value='')
+        .form-group
+          label.col-xs-3.control-label 册数
+          .col-xs-9
+            block serial_input
+              input.form-control(type='number', pattern='[0-9]', name='serialNo', value='')
+        .form-group
+          label.col-xs-3.control-label 备注
+          .col-xs-9
+            block remark_input
+              input.form-control(type='text', name='remarks', value='')
+        button#submitBtn.btn.btn-default.form-control 保存
     //- style(type='text/css').
     //-   #delDialog a{
     //-   font-size: .8em;

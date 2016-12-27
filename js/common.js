@@ -33,3 +33,7 @@ function initSelect(){
 function back() {
 	window.history.go(-1);
 }
+
+function toUrl(url){
+	window.location.href = url;
+}

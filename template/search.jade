@@ -19,6 +19,7 @@ block append scripts
         var table = $('#book_tb').find('tbody');
         $(books).each(function(){
           var $tr = $('<tr>');
+          //Binding function of redirect to new book page when clicking row
           $tr.on('click', function(){
             newBook(this)
           });
@@ -28,6 +29,7 @@ block append scripts
           }else{
             trCode += this['isbn13'];
           }
+          //generate row content
           trCode += '</td><td>'+this['title']+'</td><td>'
             +this['author']+'</td><td>'+this['pubdate']+'</td><td>'+this['publisher']+'</td>';
           $tr.append(trCode);
@@ -35,6 +37,8 @@ block append scripts
         });
       }, 'jsonp')
     }
+block pre_action
+  a.glyphicon.glyphicon-menu-left(href='index')
 block header_text
   h4 豆瓣搜索
 block content
@@ -43,7 +47,7 @@ block content
       .col-xs-10
         input.form-control(type='search', name='key', id='key')
       .col-xs-2
-        a.glyphicon.glyphicon-search(href='javascript:void(0);', onclick='getISBN()', style='margin-top: 10px;', title='Search')
+        a.glyphicon.glyphicon-search(href='javascript:void(0);', onclick='getISBN()', style='top: .7em;', title='Search')
   .row
     .col-xs-12
       table.table.table-hover#book_tb
