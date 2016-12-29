@@ -11,11 +11,11 @@ function setType(e, typeId){
   $('input[name="type"]').val(typeId);
 }
 /* Search book by ISBN using Douban API */
-function getISBN(){
+function getISBN(btnObj){
   var isbn = $('input[name="bid"]').val();
-  var doubanApi = 'https://api.douban.com/v2/book/isbn/:'+isbn;
+  var doubanApi = 'https://api.douban.com/v2/book/isbn/'+isbn;
   $.get(doubanApi, {}, function(result){
-    if(result){
+    if(result.code == undefined){
       var data = result;
       $('input[name="bName"]').val(data.title);
       $('input[name="author"]').val(data.author?data.author:'No Info');
@@ -24,5 +24,6 @@ function getISBN(){
     }else{
       alert('No Data Found');
     }
+    $(btnObj).removeClass('disabled');
   }, 'jsonp');
 }

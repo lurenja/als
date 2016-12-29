@@ -34,6 +34,11 @@ html
               $('#type_list').append($li);
             }
           },'json');
+          $('#isbn-btn').on('click', function(event){
+            event.preventDefault();
+            $(this).addClass('disabled');
+            getISBN(this);
+          });
         });
   body
     .container
@@ -53,7 +58,7 @@ html
             block bid_input
               input.form-control(type='text', name='bid', id='bid', value='')
           .col-xs-3
-            a.glyphicon.glyphicon-search(href='javascript:void(0);', onclick='getISBN()', style='margin-top: 10px;', title='Get Info')
+            button#isbn-btn.btn.btn-primary Search
         .form-group
           label.col-xs-3.control-label 书名
           .col-xs-9
@@ -96,7 +101,9 @@ html
           .col-xs-9
             block remark_input
               input.form-control(type='text', name='remarks', value='')
-        button#submitBtn.btn.btn-default.form-control 保存
+        .form-group
+          .col-xs-12
+            button#submitBtn.btn.btn-primary.btn-block 保存
     //- style(type='text/css').
     //-   #delDialog a{
     //-   font-size: .8em;

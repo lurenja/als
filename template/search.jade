@@ -1,4 +1,9 @@
 extends layout
+block append style
+  style.
+    #book_tb{
+      table-layout:fixed;
+    }
 block title
   title 搜索书籍
 block append scripts
@@ -14,16 +19,18 @@ block append scripts
     /* Search Book with Douban API */
     function getISBN() {
       var searchAPI = 'https://api.douban.com/v2/book/search?q='+$('#key').val();
+      var table = $('#book_tb').find('tbody');
+      table.html('');
       $.get(searchAPI, {}, function(data){
         var books = data.books;
-        var table = $('#book_tb').find('tbody');
+        //- var table = $('#book_tb').find('tbody');
         $(books).each(function(){
           var $tr = $('<tr>');
           //Binding function of redirect to new book page when clicking row
           $tr.on('click', function(){
             newBook(this)
           });
-          var trCode = '<td>';
+          var trCode = '<td style="overflow:hidden;">';
           if(this['isbn13'] == undefined){
             trCode += this['isbn10'];
           }else{
@@ -33,10 +40,21 @@ block append scripts
           trCode += '</td><td>'+this['title']+'</td><td>'
             +this['author']+'</td><td>'+this['pubdate']+'</td><td>'+this['publisher']+'</td>';
           $tr.append(trCode);
-          table.html($tr);
+          table.append($tr);
         });
+        $('#search-btn').prop('disabled', false);
       }, 'jsonp')
     }
+    $(function(){
+      $('#search-btn').on('click', function(event){
+        event.preventDefault();
+        if($('#key').val() != ''){
+          $(this).prop('disabled', true);
+          getISBN();
+        }
+        //- $btn.button('reset');
+      })
+    });
 block pre_action
   a.glyphicon.glyphicon-menu-left(href='index')
 block header_text
@@ -44,18 +62,19 @@ block header_text
 block content
   .row
     .form-group
-      .col-xs-10
+      .col-xs-9
         input.form-control(type='search', name='key', id='key')
-      .col-xs-2
-        a.glyphicon.glyphicon-search(href='javascript:void(0);', onclick='getISBN()', style='top: .7em;', title='Search')
+      .col-xs-3
+        //- a.glyphicon.glyphicon-search.disabled(href='javascript:void(0);', onclick='getISBN()', style='top: .7em;', title='Search')
+        button#search-btn.btn.btn-primary search
   .row
     .col-xs-12
-      table.table.table-hover#book_tb
+      table.table.table-striped.table-condensed#book_tb
         thead
           tr
-            th ISBN
-            th 名称
-            th 作者
-            th 出版时间
-            th 出版社
+            th(style="width:0%;visibility:hidden") ISBN
+            th(style="width:35%;") 名称
+            th(style="width:17%;") 作者
+            th(style="width:20%;") 出版时间
+            th(style="width:28%;") 出版社
         tbody
