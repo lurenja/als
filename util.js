@@ -27,13 +27,20 @@ function loadFile(response, pathname) {
 				response.end();
 			});
 		break;
+		case '.icon':
+		    fs.readFile('.'+pathname, 'binary', function(err, data) {
+		    	if(err) returnError(response, pathname);
+		    	response.writeHead(200, {"Content-Type": "image/x-icon"});
+		    	response.write(data, 'binary');
+		    	response.end();
+		    })
 		default:
 		returnError(response, pathname);
 	}
 }
 /* Render error page */
-function returnError(response, code, error){
-	response.writeHead(code,{"Content-Type":"text/plain"});
+function returnError(response, error){
+	response.writeHead(404,{"Content-Type":"text/plain"});
 	response.write(error+'\n');
 	response.end();
 }
