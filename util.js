@@ -33,7 +33,8 @@ function loadFile(response, pathname) {
 		    	response.writeHead(200, {"Content-Type": "image/x-icon"});
 		    	response.write(data, 'binary');
 		    	response.end();
-		    })
+		    });
+		break;
 		default:
 		returnError(response, pathname);
 	}
