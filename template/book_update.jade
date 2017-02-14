@@ -25,10 +25,7 @@ if books.length == 1
   block phouse_input
     input.form-control(type='text', name='pubHouse', id='pub_h_input', autocomplete='off', value='#{books[0].pub_house}')
   block type_input
-    .dropdown
-      button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='false', aria-expanded='false') #{books[0].tname}
-      ul#type_list.dropdown-menu
-    input(type='hidden', name='type', value='#{books[0].type_id}')
+    select.form-control#type_list(name="type")
   block serial_input
     input.form-control(type='number', pattern='[0-9]', name='serialNo', value='#{books[0].serial_no}')
   block remark_input
@@ -36,6 +33,7 @@ if books.length == 1
 block append scripts
   script(type='text/javascript').
     $(function(){
+      loadType('#{books[0].type_id}');
       $('#submitBtn').on('click', function(event){
         event.preventDefault();
         updateBook();

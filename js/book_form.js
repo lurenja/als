@@ -11,7 +11,7 @@ function setType(e, typeId){
   $('input[name="type"]').val(typeId);
 }
 /* Search book by ISBN using Douban API */
-function getISBN(btnObj){
+function getByISBN(btnObj){
   var isbn = $('input[name="bid"]').val();
   var doubanApi = 'https://api.douban.com/v2/book/isbn/'+isbn;
   $.get(doubanApi, {}, function(result){
@@ -26,4 +26,21 @@ function getISBN(btnObj){
     }
     $(btnObj).removeClass('disabled');
   }, 'jsonp');
+}
+/* Load Book Type and set select value if exists */
+function loadType(defaultId){
+  $.get('loadType',{},function(data){
+    for(var i=0, size=data.length; i<size; i++) {
+      $option = $('<option>');
+      $option.text(data[i].name).val(data[i].id);
+      if(defaultId != '' && data[i].id == defaultId){
+        $option.prop('selected', true);
+      }
+              //- $a = $('<a>');
+              //- $a.text(data[i].name).attr('onclick', 'setType(this, \''+ data[i].id +'\')').attr('href', 'javascript:void(0);');
+              //- $li = $('<li>');
+              //- $li.append($a);
+      $('#type_list').append($option);
+    }
+  },'json');
 }

@@ -5,7 +5,7 @@ var _pool;
 /* Start server */
 function start(route, handle) {
 	var server_ip = '127.0.0.1';
-	var server_port = 8080;
+	var server_port = 80;
 	function onRequest(request, response) {
 		var pathname = url.parse(request.url).pathname;
 		if(!_pool){
@@ -23,7 +23,7 @@ function initDBPool() {
 		host: '127.0.0.1',
 		user: 'abe',
 		password: '123456',
-		database: 'als_dev'
+		database: 'als'
 	});
 	console.log('DB Pool created...');
 	return pool;

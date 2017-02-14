@@ -23,6 +23,7 @@
   "dependencies": {
     "formidable": "^1.0.17",
     "jade": "^1.11.0",
-    "mysql": "^2.10.2"
+    "mysql": "^2.10.2",
+    "path": "^0.12.7"
   }
 }

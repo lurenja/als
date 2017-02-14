@@ -31,6 +31,7 @@ block phouse_input
 block append scripts
   script(type='text/javascript').
     $(function(){
+      loadType('');
       $('#submitBtn').on('click', function(event){
         event.preventDefault();
         createBook();

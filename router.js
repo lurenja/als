@@ -5,7 +5,7 @@ function route(handle, pathname, response, request, dbpool){
 	    console.log("Route request: "+ pathname);
 		handle[pathname](response, request, dbpool);
 	}else{
-		handle['load'](response, pathname);
+		handle['load'](response, request, pathname);
 	}
 }
 exports.route = route;

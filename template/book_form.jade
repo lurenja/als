@@ -25,19 +25,10 @@ html
               }, 'json');
             }
           });
-          $.get('loadType',{},function(data){
-            for(var i=0, size=data.length; i<size; i++) {
-              $a = $('<a>');
-              $a.text(data[i].name).attr('onclick', 'setType(this, \''+ data[i].id +'\')').attr('href', 'javascript:void(0);');
-              $li = $('<li>');
-              $li.append($a);
-              $('#type_list').append($li);
-            }
-          },'json');
           $('#isbn-btn').on('click', function(event){
             event.preventDefault();
             $(this).addClass('disabled');
-            getISBN(this);
+            getByISBN(this);
           });
         });
   body
@@ -69,8 +60,6 @@ html
           .col-xs-9
             block author_input
               input.form-control(type='text', name='author', id='author_input', autocomplete='off', value='')
-          //- #author_div.col-xs-3
-          //-   a.glyphicon.glyphicon-plus(href='javascript:void(0);', onclick='newAuthor()', style='margin-top: 10px;', title='New Author')
         .form-group
           label.col-xs-3.control-label 出版日期
           .col-xs-9
@@ -85,12 +74,7 @@ html
           label.col-xs-3.control-label 类型
           .col-xs-9
             block type_input
-              .dropdown
-                button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='false', aria-expanded='false') 类型
-                ul#type_list.dropdown-menu
-                  //- li
-                  //-   a(href='#', onclick="setType(this, \''. $row['id'] .'\')"): 类型
-              input(type='hidden', name='type', value='')
+              select.form-control#type_list(name="type")
         .form-group
           label.col-xs-3.control-label 册数
           .col-xs-9
@@ -104,7 +88,3 @@ html
         .form-group
           .col-xs-12
             button#submitBtn.btn.btn-primary.btn-block 保存
-    //- style(type='text/css').
-    //-   #delDialog a{
-    //-   font-size: .8em;
-    //-   }

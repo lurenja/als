@@ -12,14 +12,14 @@ function index(response, request, pool){
 }
 /* Load book types and return to page */
 function getBookType(response, request, pool) {
-	loadBookType(pool, function(data){
+	loadBookType(response, pool, function(data){
 		response.writeHead(200,{"Content-Type":"application/json"});
 		response.write(JSON.stringify(data));
 		response.end();
 	});
 }
 /* Query book types from database */
-function loadBookType(pool, callback){
+function loadBookType(response, pool, callback){
 	var sql = 'select t.t_no as id, t.description as name FROM tbl_book_type t where t.t_no is not null order by t.t_no';
 	pool.getConnection(function(err, conn) {
 		if(err) util.returnError(response, 500, err);
