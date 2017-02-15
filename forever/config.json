@@ -1,0 +1,8 @@
+{
+    // Comments are supported
+    "uid": "als",
+    "append": true,
+    "watch": true,
+    "script": "index.js",
+    "sourceDir": "/home/abe/Documents/www/als"
+}
