@@ -7,7 +7,7 @@ var util = require('./util');
 function bookList(response, request, pool){
 	var sql = 'select t.bid, t.b_name, t.author as aname '+
 				'from tbl_book t '+
-			   'order by t.bid desc';
+			   'order by t.type, convert(t.b_name using gbk), t.rectime';
 	pool.getConnection(function(err, conn){
 		if(err) util.returnError(response, 500, err);
 		conn.query(sql, [],

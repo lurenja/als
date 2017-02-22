@@ -26,7 +26,7 @@ function loadFile(response, request, pathname) {
 					response.setHeader("Cache-Control", "max-age=" + expires.Expires.maxAge);
 				}
 
-				console.log(pathname+' last modify at:'+request.headers[ifModifiedSince]);
+				// console.log(pathname+' last modify at:'+request.headers[ifModifiedSince]);
 				if (request.headers[ifModifiedSince] && lastModified == request.headers[ifModifiedSince]) { //If not modified return 304
 					response.writeHead(304, "Not Modified");
 					response.end();
